@@ -20,12 +20,10 @@
 // Namespace declarations
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlQuery: public ExtensionMethod
+class MysqlQuery: public Extensions::ExtensionMethod
 {
 public:
 	MysqlQuery()
@@ -70,8 +68,6 @@ public:
 };
 
 
-}
-}
 }
 
 

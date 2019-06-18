@@ -2,6 +2,7 @@
 #ifndef Extensions_Mysql_MysqlFieldSeek_h
 #define Extensions_Mysql_MysqlFieldSeek_h
 
+
 // Library includes
 
 // Project includes
@@ -13,15 +14,16 @@
 #include <Core/Tools.h>
 #include "Types.h"
 
+// Forward declarations
+
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlFieldSeek : public ExtensionMethod
+class MysqlFieldSeek : public Extensions::ExtensionMethod
 {
 public:
 	MysqlFieldSeek()
@@ -66,8 +68,6 @@ public:
 };
 
 
-}
-}
 }
 
 

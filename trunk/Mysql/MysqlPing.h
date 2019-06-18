@@ -17,14 +17,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlPing: public ExtensionMethod
+class MysqlPing: public Extensions::ExtensionMethod
 {
 public:
 	MysqlPing()
@@ -67,8 +66,6 @@ public:
 };
 
 
-}
-}
 }
 
 

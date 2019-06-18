@@ -18,14 +18,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlRealEscapeString : public ExtensionMethod
+class MysqlRealEscapeString : public Extensions::ExtensionMethod
 {
 public:
 	MysqlRealEscapeString()
@@ -72,8 +71,6 @@ public:
 };
 
 
-}
-}
 }
 
 

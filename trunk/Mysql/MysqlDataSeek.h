@@ -19,14 +19,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlDataSeek : public ExtensionMethod
+class MysqlDataSeek : public Extensions::ExtensionMethod
 {
 public:
 	MysqlDataSeek()
@@ -69,8 +68,6 @@ public:
 };
 
 
-}
-}
 }
 
 

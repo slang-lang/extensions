@@ -13,15 +13,16 @@
 #include <Core/Tools.h>
 #include "Types.h"
 
+// Forward declarations
+
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlRowSeek : public ExtensionMethod
+class MysqlRowSeek : public Extensions::ExtensionMethod
 {
 public:
 	MysqlRowSeek()
@@ -66,8 +67,6 @@ public:
 };
 
 
-}
-}
 }
 
 

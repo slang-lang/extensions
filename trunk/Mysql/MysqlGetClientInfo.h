@@ -15,14 +15,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlGetClientInfo : public ExtensionMethod
+class MysqlGetClientInfo : public Extensions::ExtensionMethod
 {
 public:
 	MysqlGetClientInfo()
@@ -53,8 +52,6 @@ public:
 };
 
 
-}
-}
 }
 
 
