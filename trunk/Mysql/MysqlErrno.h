@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlErrno_h
-#define ObjectiveScript_Extensions_Mysql_MysqlErrno_h
+#ifndef Extensions_Mysql_MysqlErrno_h
+#define Extensions_Mysql_MysqlErrno_h
 
 
 // Library includes

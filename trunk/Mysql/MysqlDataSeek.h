@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlDataSeek_h
-#define ObjectiveScript_Extensions_Mysql_MysqlDataSeek_h
+#ifndef Extensions_Mysql_MysqlDataSeek_h
+#define Extensions_Mysql_MysqlDataSeek_h
 
 
 // Library includes

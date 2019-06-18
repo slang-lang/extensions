@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlGetClientInfo_h
-#define ObjectiveScript_Extensions_Mysql_MysqlGetClientInfo_h
+#ifndef Extensions_Mysql_MysqlGetClientInfo_h
+#define Extensions_Mysql_MysqlGetClientInfo_h
 
 
 // Library includes
