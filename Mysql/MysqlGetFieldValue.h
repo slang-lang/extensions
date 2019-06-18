@@ -17,14 +17,14 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
+
 namespace Mysql {
 
 
-class MysqlGetFieldValueByIndex : public ExtensionMethod
+class MysqlGetFieldValueByIndex : public Extensions::ExtensionMethod
 {
 public:
 	MysqlGetFieldValueByIndex()
@@ -77,7 +77,7 @@ public:
 };
 
 
-class MysqlGetFieldValueByName : public ExtensionMethod
+class MysqlGetFieldValueByName : public Extensions::ExtensionMethod
 {
 public:
 	MysqlGetFieldValueByName()
@@ -140,8 +140,6 @@ public:
 };
 
 
-}
-}
 }
 
 

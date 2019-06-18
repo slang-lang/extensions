@@ -14,8 +14,6 @@
 // Namespace declarations
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
@@ -29,8 +27,6 @@ extern MysqlResultMap mMysqlResults;
 extern int mNumMysqlResults;
 
 
-}
-}
 }
 
 

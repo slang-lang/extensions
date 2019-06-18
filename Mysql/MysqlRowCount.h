@@ -17,14 +17,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlRowCount : public ExtensionMethod
+class MysqlRowCount : public Extensions::ExtensionMethod
 {
 public:
 	MysqlRowCount()
@@ -67,8 +66,6 @@ public:
 };
 
 
-}
-}
 }
 
 

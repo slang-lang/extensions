@@ -18,14 +18,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlRealConnect: public ExtensionMethod
+class MysqlRealConnect: public Extensions::ExtensionMethod
 {
 public:
 	MysqlRealConnect()
@@ -100,8 +99,6 @@ public:
 };
 
 
-}
-}
 }
 
 

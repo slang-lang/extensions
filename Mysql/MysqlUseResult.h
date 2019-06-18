@@ -17,14 +17,13 @@
 // Forward declarations
 
 // Namespace declarations
+using namespace ObjectiveScript;
 
 
-namespace ObjectiveScript {
-namespace Extensions {
 namespace Mysql {
 
 
-class MysqlUseResult: public ExtensionMethod
+class MysqlUseResult: public Extensions::ExtensionMethod
 {
 public:
 	MysqlUseResult()
@@ -73,8 +72,6 @@ public:
 };
 
 
-}
-}
 }
 
 

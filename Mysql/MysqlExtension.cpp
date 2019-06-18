@@ -55,36 +55,36 @@ void MysqlExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethod
 {
 	assert(methods.empty());
 
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlAffectedRows());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlClose());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlDataSeek());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlErrno());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlError());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlFieldCount());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlFieldSeek());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlFieldTell());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlFreeResult());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlGetClientInfo());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlGetFieldName());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlGetFieldValueByIndex());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlGetFieldValueByName());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlInfo());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlInit());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlNextResult());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlNextRow());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlNumFields());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlNumRows());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlPing());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlQuery());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlRealEscapeString());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlRealConnect());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlRowCount());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlRowSeek());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlRowTell());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlSelectDB());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlStat());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlStoreResult());
-	methods.push_back(new ObjectiveScript::Extensions::Mysql::MysqlUseResult());
+	methods.push_back(new Mysql::MysqlAffectedRows());
+	methods.push_back(new Mysql::MysqlClose());
+	methods.push_back(new Mysql::MysqlDataSeek());
+	methods.push_back(new Mysql::MysqlErrno());
+	methods.push_back(new Mysql::MysqlError());
+	methods.push_back(new Mysql::MysqlFieldCount());
+	methods.push_back(new Mysql::MysqlFieldSeek());
+	methods.push_back(new Mysql::MysqlFieldTell());
+	methods.push_back(new Mysql::MysqlFreeResult());
+	methods.push_back(new Mysql::MysqlGetClientInfo());
+	methods.push_back(new Mysql::MysqlGetFieldName());
+	methods.push_back(new Mysql::MysqlGetFieldValueByIndex());
+	methods.push_back(new Mysql::MysqlGetFieldValueByName());
+	methods.push_back(new Mysql::MysqlInfo());
+	methods.push_back(new Mysql::MysqlInit());
+	methods.push_back(new Mysql::MysqlNextResult());
+	methods.push_back(new Mysql::MysqlNextRow());
+	methods.push_back(new Mysql::MysqlNumFields());
+	methods.push_back(new Mysql::MysqlNumRows());
+	methods.push_back(new Mysql::MysqlPing());
+	methods.push_back(new Mysql::MysqlQuery());
+	methods.push_back(new Mysql::MysqlRealEscapeString());
+	methods.push_back(new Mysql::MysqlRealConnect());
+	methods.push_back(new Mysql::MysqlRowCount());
+	methods.push_back(new Mysql::MysqlRowSeek());
+	methods.push_back(new Mysql::MysqlRowTell());
+	methods.push_back(new Mysql::MysqlSelectDB());
+	methods.push_back(new Mysql::MysqlStat());
+	methods.push_back(new Mysql::MysqlStoreResult());
+	methods.push_back(new Mysql::MysqlUseResult());
 }
 
 
