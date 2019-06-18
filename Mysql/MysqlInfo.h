@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlInfo_h
-#define ObjectiveScript_Extensions_Mysql_MysqlInfo_h
+#ifndef Extensions_Mysql_MysqlInfo_h
+#define Extensions_Mysql_MysqlInfo_h
 
 
 // Library includes

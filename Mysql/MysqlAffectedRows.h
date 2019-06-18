@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlAffectedRows_h
-#define ObjectiveScript_Extensions_Mysql_MysqlAffectedRows_h
+#ifndef Extensions_Mysql_MysqlAffectedRows_h
+#define Extensions_Mysql_MysqlAffectedRows_h
 
 
 // Library includes

@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlRealConnect_h
-#define ObjectiveScript_Extensions_Mysql_MysqlRealConnect_h
+#ifndef Extensions_Mysql_MysqlRealConnect_h
+#define Extensions_Mysql_MysqlRealConnect_h
 
 
 // Library include

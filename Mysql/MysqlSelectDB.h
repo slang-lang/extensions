@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlSelectDB_h
-#define ObjectiveScript_Extensions_Mysql_MysqlSelectDB_h
+#ifndef Extensions_Mysql_MysqlSelectDB_h
+#define Extensions_Mysql_MysqlSelectDB_h
 
 
 // Library includes

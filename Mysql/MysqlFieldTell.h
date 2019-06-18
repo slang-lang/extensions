@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlFieldTell_h
-#define ObjectiveScript_Extensions_Mysql_MysqlFieldTell_h
+#ifndef Extensions_Mysql_MysqlFieldTell_h
+#define Extensions_Mysql_MysqlFieldTell_h
 
 // Library includes
 

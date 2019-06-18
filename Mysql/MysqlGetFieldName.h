@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlGetFieldName_h
-#define ObjectiveScript_Extensions_Mysql_MysqlGetFieldName_h
+#ifndef Extensions_Mysql_MysqlGetFieldName_h
+#define Extensions_Mysql_MysqlGetFieldName_h
 
 
 // Library includes

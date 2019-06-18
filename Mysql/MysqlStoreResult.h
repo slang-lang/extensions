@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlStoreResult_h
-#define ObjectiveScript_Extensions_Mysql_MysqlStoreResult_h
+#ifndef Extensions_Mysql_MysqlStoreResult_h
+#define Extensions_Mysql_MysqlStoreResult_h
 
 
 // Library include

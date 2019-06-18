@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Mysql_MysqlRealEscapeString_h
-#define ObjectiveScript_Extensions_Mysql_MysqlRealEscapeString_h
+#ifndef Extensions_Mysql_MysqlRealEscapeString_h
+#define Extensions_Mysql_MysqlRealEscapeString_h
 
 
 // Library includes
