@@ -36,6 +36,6 @@ SET(HEADERS
 SET(DEPENDENCIES
 )
 
-add_include(Externals/sqlite328)
+add_include(Externals)
 
 build_shared_lib(ObjectiveScriptSqlite3 oscript)
