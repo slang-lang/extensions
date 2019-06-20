@@ -10,7 +10,18 @@
 #include "Sqlite3Errcode.h"
 #include "Sqlite3Errmsg.h"
 #include "Sqlite3Exec.h"
+#include "Sqlite3FieldCount.h"
+#include "Sqlite3FieldSeek.h"
+#include "Sqlite3FieldTell.h"
+#include "Sqlite3FreeResult.h"
+#include "Sqlite3GetFieldName.h"
+#include "Sqlite3GetFieldValue.h"
+#include "Sqlite3NextField.h"
+#include "Sqlite3NextRow.h"
 #include "Sqlite3Open.h"
+#include "Sqlite3RowCount.h"
+#include "Sqlite3RowSeek.h"
+#include "Sqlite3RowTell.h"
 
 // Namespace declarations
 
@@ -25,6 +36,9 @@ Sqlite3Extension::Sqlite3Extension()
     if ( result != SQLITE_OK ) {
         std::cout << "Error while initializing sqlite3 extension!" << std::endl;
     }
+
+    // initialize first result which acts as invalid result "handle"
+    mResults[0] = Sqlite3Result();
 }
 
 Sqlite3Extension::~Sqlite3Extension()
@@ -50,7 +64,20 @@ void Sqlite3Extension::provideMethods(ObjectiveScript::Extensions::ExtensionMeth
     methods.push_back(new Sqlite3Errcode());
     methods.push_back(new Sqlite3Errmsg());
     methods.push_back(new Sqlite3Exec());
+    methods.push_back(new Sqlite3FieldCount());
+    methods.push_back(new Sqlite3FieldSeek());
+    methods.push_back(new Sqlite3FieldTell());
+    methods.push_back(new Sqlite3FreeResult());
+    methods.push_back(new Sqlite3GetFieldName());
+    methods.push_back(new Sqlite3GetFieldValue());
+    methods.push_back(new Sqlite3GetFieldValueByIndex());
+    methods.push_back(new Sqlite3GetFieldValueByName());
+    methods.push_back(new Sqlite3NextField());
+    methods.push_back(new Sqlite3NextRow());
 	methods.push_back(new Sqlite3Open());
+    methods.push_back(new Sqlite3RowCount());
+    methods.push_back(new Sqlite3RowSeek());
+    methods.push_back(new Sqlite3RowTell());
 }
 
 

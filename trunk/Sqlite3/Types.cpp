@@ -13,12 +13,7 @@ namespace Sqlite3 {
 
 
 Sqlite3ConnectionMap mConnections;
-int mNumConnections = 0;
-
-/*
 Sqlite3ResultMap mResults;
-int mNumResults = 0;
-*/
 
 
 }

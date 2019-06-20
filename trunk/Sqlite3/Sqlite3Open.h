@@ -39,13 +39,13 @@ public:
 
 			std::string param_file = (*it++).value().toStdString();
 
-			int handle = sqlite3_open(param_file.c_str(), &mConnections[mNumConnections++]);
+			int handle = sqlite3_open(param_file.c_str(), &mConnections[mConnections.size()]);
 
-			*result = ObjectiveScript::Runtime::IntegerObject( handle );
+			*result = Runtime::IntegerObject( handle );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = ObjectiveScript::Runtime::StringObject(std::string(e.what()));
+			*data = Runtime::StringObject(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;

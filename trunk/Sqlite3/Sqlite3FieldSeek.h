@@ -1,6 +1,6 @@
 
-#ifndef Extensions_Sqlite3Close_h
-#define Extensions_Sqlite3Close_h
+#ifndef Extensions_Sqlite3FieldSeek_h
+#define Extensions_Sqlite3FieldSeek_h
 
 
 // Library includes
@@ -17,14 +17,15 @@ using namespace ObjectiveScript;
 namespace Sqlite3 {
 
 
-class Sqlite3Close : public Extensions::ExtensionMethod
+class Sqlite3FieldSeek : public Extensions::ExtensionMethod
 {
 public:
-    Sqlite3Close()
-	: ExtensionMethod(0, "sqlite3_close", Designtime::VoidObject::TYPENAME)
+    Sqlite3FieldSeek()
+	: ExtensionMethod(0, "sqlite3_field_seek", Designtime::VoidObject::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("result", Designtime::IntegerObject::TYPENAME));
+        params.push_back(Parameter::CreateDesigntime("offset", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
@@ -37,9 +38,12 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			int param_handle = (*it++).value().toInt();
+			int param_result = (*it++).value().toInt();
+            int param_offset = (*it++).value().toInt();
 
-			sqlite3_close(mConnections[param_handle]);
+			if ( param_result > 0 && param_result < (int)mResults.size() ) {
+			    mResults[param_result].fieldSeek(param_offset);
+			}
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
