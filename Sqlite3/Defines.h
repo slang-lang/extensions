@@ -4,7 +4,7 @@
 
 
 // Library includes
-#include <sqlite3.h>
+#include <Externals/sqlite328/sqlite3.h>
 
 // Project includes
 #include <Core/Common/Exceptions.h>
@@ -24,9 +24,6 @@
 
 
 namespace Sqlite3 {
-
-
-void prepareCallback();
 
 
 }
