@@ -69,6 +69,7 @@ void Sqlite3Extension::provideMethods(ObjectiveScript::Extensions::ExtensionMeth
     methods.push_back(new Sqlite3FieldTell());
     methods.push_back(new Sqlite3FreeResult());
     methods.push_back(new Sqlite3GetFieldName());
+    methods.push_back(new Sqlite3GetFieldNameByIndex());
     methods.push_back(new Sqlite3GetFieldValue());
     methods.push_back(new Sqlite3GetFieldValueByIndex());
     methods.push_back(new Sqlite3GetFieldValueByName());

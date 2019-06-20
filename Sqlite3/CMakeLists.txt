@@ -12,6 +12,7 @@ SET(HEADERS
     Defines.h
     Sqlite3Extension.h
     Sqlite3Close.h
+    Sqlite3Column.h
     Sqlite3Errcode.h
     Sqlite3Errmsg.h
     Sqlite3Exec.h
@@ -24,6 +25,8 @@ SET(HEADERS
     Sqlite3NextField.h
     Sqlite3NextRow.h
     Sqlite3Open.h
+    Sqlite3Result.h
+    Sqlite3Row.h
     Sqlite3RowCount.h
     Sqlite3RowSeek.h
     Sqlite3RowTell.h
