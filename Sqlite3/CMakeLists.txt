@@ -15,7 +15,18 @@ SET(HEADERS
     Sqlite3Errcode.h
     Sqlite3Errmsg.h
     Sqlite3Exec.h
+    Sqlite3FieldCount.h
+    Sqlite3FieldSeek.h
+    Sqlite3FieldTell.h
+    Sqlite3FreeResult.h
+    Sqlite3GetFieldName.h
+    Sqlite3GetFieldValue.h
+    Sqlite3NextField.h
+    Sqlite3NextRow.h
     Sqlite3Open.h
+    Sqlite3RowCount.h
+    Sqlite3RowSeek.h
+    Sqlite3RowTell.h
     Types.h
 )
 

@@ -1,6 +1,6 @@
 
-#ifndef Extensions_Sqlite3Errmsg_h
-#define Extensions_Sqlite3Errmsg_h
+#ifndef Extensions_Sqlite3NextRow_h
+#define Extensions_Sqlite3NextRow_h
 
 
 // Library includes
@@ -17,14 +17,14 @@ using namespace ObjectiveScript;
 namespace Sqlite3 {
 
 
-class Sqlite3Errmsg : public Extensions::ExtensionMethod
+class Sqlite3NextRow : public Extensions::ExtensionMethod
 {
 public:
-    Sqlite3Errmsg()
-	: ExtensionMethod(0, "sqlite3_errmsg", Designtime::StringObject::TYPENAME)
+    Sqlite3NextRow()
+	: ExtensionMethod(0, "sqlite3_next_row", Designtime::IntegerObject::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("result", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
@@ -37,11 +37,15 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			int param_handle = (*it++).value().toInt();
+			int param_result = (*it++).value().toInt();
 
-			std::string errmsg = sqlite3_errmsg(mConnections[param_handle]);
+			int nextRow = 0;
 
-			*result = Runtime::StringObject( errmsg );
+			if ( param_result > 0 && param_result < (int)mResults.size() ) {
+                nextRow = mResults[param_result].nextRow();
+			}
+
+			*result = Runtime::IntegerObject( nextRow );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

@@ -41,11 +41,11 @@ public:
 
 			int errocode = sqlite3_errcode(mConnections[param_handle]);
 
-			*result = ObjectiveScript::Runtime::IntegerObject( errocode );
+			*result = Runtime::IntegerObject( errocode );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = ObjectiveScript::Runtime::StringObject(std::string(e.what()));
+			*data = Runtime::StringObject(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
