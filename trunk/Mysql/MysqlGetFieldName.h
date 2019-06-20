@@ -30,11 +30,10 @@ public:
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("field_id", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("field_index", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
-
 
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* result, const Token& token)
 	{
@@ -44,7 +43,7 @@ public:
 			ParameterList::const_iterator it = list.begin();
 
 			int param_handle = (*it++).value().toInt();
-			int param_field_id = (*it++).value().toInt();
+			int param_field_index = (*it++).value().toInt();
 
 			MYSQL_RES *myResult = mMysqlResults[param_handle];
 			if ( !myResult ) {
@@ -52,8 +51,8 @@ public:
 			}
 
 			std::string my_result;
-			if ( myResult->fields[param_field_id].name ) {
-				my_result = std::string(myResult->fields[param_field_id].name);
+			if ( myResult->fields[param_field_index].name ) {
+				my_result = std::string(myResult->fields[param_field_index].name);
 			}
 
 			*result = Runtime::StringObject(my_result);
