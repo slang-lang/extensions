@@ -18,11 +18,16 @@ using namespace ObjectiveScript;
 namespace Sqlite3 {
 
 
-static int callback(void* data, int argc, char** argv, char** azColName)
+static int callback(void* /*data*/, int argc, char** argv, char** azColName)
 {
     Sqlite3Result& result = mResults[mResults.size() - 1];
 
-    result.pushRow( Sqlite3Row(argc, argv, azColName, data) );
+    Sqlite3Row row;
+    for ( int idx = 0; idx < argc; ++idx ) {
+        row.push( std::string(azColName[idx]), std::string(argv[idx]) );
+    }
+
+    result.pushRow( row );
 
     return 0;
 }
