@@ -39,7 +39,7 @@ public:
 
 			int param_handle = (*it++).value().toInt();
 
-			std::string errmsg = sqlite3_errmsg(mConnections[param_handle]);
+			std::string errmsg = sqlite3_errmsg( mConnections[param_handle] );
 
 			*result = Runtime::StringObject( errmsg );
 		}
