@@ -39,9 +39,12 @@ public:
 
 			std::string param_file = (*it++).value().toStdString();
 
-			int error = sqlite3_open(param_file.c_str(), &mConnections[mConnections.size()]);
+			size_t connection_handle = mConnections.size();
+			sqlite3** database = &mConnections[connection_handle];
 
-			*result = Runtime::IntegerObject( static_cast<int>(error ? 0 : mConnections.size()) );
+			int error = sqlite3_open(param_file.c_str(), database);
+
+			*result = Runtime::IntegerObject( static_cast<int>(error ? 0 : connection_handle) );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

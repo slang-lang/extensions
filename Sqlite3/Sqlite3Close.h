@@ -39,7 +39,9 @@ public:
 
 			int param_handle = (*it++).value().toInt();
 
-			sqlite3_close(mConnections[param_handle]);
+			if ( param_handle > 0 && param_handle < (int)mConnections.size() ) {
+			    sqlite3_close(mConnections[param_handle]);
+            }
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

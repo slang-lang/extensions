@@ -39,7 +39,10 @@ public:
 
 			int param_handle = (*it++).value().toInt();
 
-			int errorCode = sqlite3_errcode( mConnections[param_handle] );
+			int errorCode = 0;
+            if ( param_handle > 0 && param_handle < (int)mConnections.size() ) {
+                errorCode = sqlite3_errcode( mConnections[param_handle] );
+            }
 
 			*result = Runtime::IntegerObject( errorCode );
 		}

@@ -38,7 +38,6 @@ public:
             ParameterList::const_iterator it = list.begin();
 
             int param_result = (*it++).value().toInt();
-            int param_index = (*it++).value().toInt();
 
             std::string fieldName;
             if ( param_result > 0 && param_result < (int)mResults.size() ) {
