@@ -41,7 +41,7 @@ public:
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
-        params.push_back(Parameter::CreateDesigntime("sql", Designtime::StringObject::TYPENAME));
+        params.push_back(Parameter::CreateDesigntime("query", Designtime::StringObject::TYPENAME));
 
 		setSignature(params);
 	}

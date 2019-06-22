@@ -39,9 +39,9 @@ public:
 
 			std::string param_file = (*it++).value().toStdString();
 
-			int handle = sqlite3_open(param_file.c_str(), &mConnections[mConnections.size()]);
+			int error = sqlite3_open(param_file.c_str(), &mConnections[mConnections.size()]);
 
-			*result = Runtime::IntegerObject( handle );
+			*result = Runtime::IntegerObject( static_cast<int>(error ? 0 : mConnections.size()) );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

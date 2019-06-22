@@ -39,9 +39,9 @@ public:
 
 			int param_handle = (*it++).value().toInt();
 
-			int errocode = sqlite3_errcode(mConnections[param_handle]);
+			int errorCode = sqlite3_errcode( mConnections[param_handle] );
 
-			*result = Runtime::IntegerObject( errocode );
+			*result = Runtime::IntegerObject( errorCode );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
