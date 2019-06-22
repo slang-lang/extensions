@@ -36,6 +36,10 @@ SET(HEADERS
 SET(DEPENDENCIES
 )
 
+SET(MODULES
+    oscript
+)
+
 add_include(Externals)
 
-build_shared_lib(ObjectiveScriptSqlite3 oscript)
+build_shared_lib(ObjectiveScriptSqlite3 "${MODULES}")
