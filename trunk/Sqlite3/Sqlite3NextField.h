@@ -40,7 +40,6 @@ public:
 			int param_result = (*it++).value().toInt();
 
 			int nextField = 0;
-
 			if ( param_result > 0 && param_result < (int)mResults.size() ) {
                 nextField = mResults[param_result].nextField();
 			}

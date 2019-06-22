@@ -39,7 +39,9 @@ public:
 
 			int param_result = (*it++).value().toInt();
 
-			mResults[param_result].clear();
+			if ( param_result > 0 && param_result < (int)mResults.size() ) {
+			    mResults[param_result].clear();
+            }
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

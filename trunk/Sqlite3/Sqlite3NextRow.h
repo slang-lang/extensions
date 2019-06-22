@@ -40,7 +40,6 @@ public:
 			int param_result = (*it++).value().toInt();
 
 			int nextRow = 0;
-
 			if ( param_result > 0 && param_result < (int)mResults.size() ) {
                 nextRow = mResults[param_result].nextRow();
 			}

@@ -32,7 +32,7 @@ public:
     std::string Value;
 };
 
-typedef std::vector<Sqlite3Column> Columns;
+typedef std::vector<Sqlite3Column> Sqlite3Columns;
 
 
 }

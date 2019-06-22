@@ -80,11 +80,11 @@ public:
 			ParameterList::const_iterator it = list.begin();
 
 			int param_result = (*it++).value().toInt();
-			int param_index = (*it++).value().toInt();
+			int param_field_index = (*it++).value().toInt();
 
 			std::string fieldValue;
             if ( param_result > 0 && param_result < (int)mResults.size() ) {
-                fieldValue = mResults[param_result].getFieldValueByIndex(param_index);
+                fieldValue = mResults[param_result].getFieldValueByIndex(param_field_index);
             }
 
 			*result = Runtime::StringObject( fieldValue );
@@ -124,11 +124,11 @@ public:
             ParameterList::const_iterator it = list.begin();
 
             int param_result = (*it++).value().toInt();
-            std::string param_name = (*it++).value().toStdString();
+            std::string param_field_name = (*it++).value().toStdString();
 
             std::string fieldValue;
             if ( param_result > 0 && param_result < (int)mResults.size() ) {
-                fieldValue = mResults[param_result].getFieldValueByName(param_name);
+                fieldValue = mResults[param_result].getFieldValueByName(param_field_name);
             }
 
             *result = Runtime::StringObject( fieldValue );

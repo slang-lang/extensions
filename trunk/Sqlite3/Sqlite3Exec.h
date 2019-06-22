@@ -57,14 +57,20 @@ public:
             int param_handle = (*it++).value().toInt();
 			std::string param_sql = (*it++).value().toStdString();
 
-			int result_handle = mResults.size();
-			mResults[result_handle] = Sqlite3Result();
+			int result_handle = 0;
 
-			int error = sqlite3_exec(mConnections[param_handle], param_sql.c_str(), callback, NULL, NULL);
-			if ( error ) {
-			    // if an error occurs we return 0, which indicates an invalid result handle
-			    result_handle = 0;
-			}
+			if ( param_handle > 0 && param_handle < (int)mConnections.size() ) {
+			    // initialize result
+			    result_handle = mResults.size();
+                mResults[result_handle] = Sqlite3Result();
+
+                // execute query
+                int error = sqlite3_exec(mConnections[param_handle], param_sql.c_str(), callback, NULL, NULL);
+                if ( error ) {
+                    // if an error occurs we return 0, which indicates an invalid result handle
+                    result_handle = 0;
+                }
+            }
 
 			*result = Runtime::IntegerObject( result_handle );
 		}

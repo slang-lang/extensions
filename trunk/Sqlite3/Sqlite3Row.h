@@ -30,8 +30,8 @@ public:
         return "";
     }
 
-    void push(const std::string& name, const std::string& value) {
-        mColumns.push_back( Sqlite3Column(name, value) );
+    void push(const std::string& name, const std::string& value, const std::string& type = "") {
+        mColumns.push_back( Sqlite3Column(name, value, type) );
     }
 
     void push(const Sqlite3Column& column) {
@@ -63,7 +63,7 @@ public:
     }
 
 private:
-    Columns mColumns;
+    Sqlite3Columns mColumns;
 };
 
 typedef std::vector<Sqlite3Row> Sqlite3Rows;

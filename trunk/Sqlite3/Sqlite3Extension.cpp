@@ -37,6 +37,8 @@ Sqlite3Extension::Sqlite3Extension()
         std::cout << "Error while initializing sqlite3 extension!" << std::endl;
     }
 
+    // initialize first connection which acts as invalid handle
+    mConnections[0] = NULL;
     // initialize first result which acts as invalid result "handle"
     mResults[0] = Sqlite3Result();
 }
