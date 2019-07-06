@@ -43,9 +43,9 @@ public:
 
 			int error = 0;
 			if ( param_handle > 0 && param_handle < (int)mPipes.size() ) {
-				Pipe& p = mPipes[param_handle];
+				int& p = mPipes[param_handle];
 
-				write(p.fd[1], param_message.c_str(), param_message.size());
+				write(p, param_message.c_str(), param_message.size());
 			}
 			else {
 				error = -1;

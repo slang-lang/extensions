@@ -18,13 +18,7 @@
 namespace Pipe {
 
 
-class Pipe
-{
-public:
-	int fd[2];
-};
-
-typedef std::map<int, Pipe> Pipes;
+typedef std::map<int, /*file descriptor*/ int> Pipes;
 
 extern Pipes mPipes;
 

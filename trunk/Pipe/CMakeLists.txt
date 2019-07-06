@@ -8,8 +8,8 @@ SET(SOURCES
 SET(HEADERS
     Defines.h
     PipeClose.h
-    PipeCreate.h
     PipeExtension.h
+    PipeOpen.h
     PipeRead.h
     PipeWrite.h
     Types.h

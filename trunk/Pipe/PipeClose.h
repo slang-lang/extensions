@@ -41,13 +41,10 @@ public:
 
 			int error = 0;
 			if ( param_handle > 0 && param_handle < (int)mPipes.size() ) {
-				Pipe& p = mPipes[param_handle];
+				int& p = mPipes[param_handle];
 
-				close(p.fd[0]);
-				p.fd[0] = 0;
-
-				close(p.fd[1]);
-				p.fd[1] = 0;
+				close(p);
+				p = 0;
 			}
 			else {
 				error = -1;

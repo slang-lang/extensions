@@ -1,9 +1,13 @@
 
-#ifndef Extensions_PipeCreate_h
-#define Extensions_PipeCreate_h
+#ifndef Extensions_PipeOpen_h
+#define Extensions_PipeOpen_h
 
 
 // Library includes
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 // Project includes
 #include "Defines.h"
@@ -17,14 +21,16 @@ using namespace ObjectiveScript;
 namespace Pipe {
 
 
-class PipeCreate : public Extensions::ExtensionMethod
+class PipeOpen : public Extensions::ExtensionMethod
 {
 public:
-	PipeCreate()
-	: ExtensionMethod(0, "pipe_create", Designtime::IntegerObject::TYPENAME)
+	PipeOpen()
+	: ExtensionMethod(0, "pipe_open", Designtime::IntegerObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("mode", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("block", Designtime::BoolObject::TYPENAME, true, true));
 
 		setSignature(params);
 	}
@@ -38,13 +44,25 @@ public:
 			ParameterList::const_iterator it = list.begin();
 
 			std::string param_name = (*it++).value().toStdString();
+			std::string param_mode = (*it++).value().toStdString();
+			bool param_block = (*it++).value().toBool();
 
-			size_t pipe_handle = mPipes.size();
-			Pipe& p = mPipes[pipe_handle];
+			size_t pipe_handle = 0;
 
-			int error = pipe(p.fd);
+			if ( param_mode == "r" || param_mode == "w" ) {
+				pipe_handle = mPipes.size();
+				int& p = mPipes[pipe_handle];
 
-			*result = Runtime::IntegerObject( static_cast<int>(error == -1 ? 0 : pipe_handle) );
+				if ( mknod(param_name.c_str(), S_IFIFO | 0666, 0) == 0 || errno == EEXIST ) {
+					p = open(param_name.c_str(), (param_mode == "r" ? O_RDONLY : O_WRONLY) | (param_block ? 0 : O_NDELAY) );
+				}
+				else {
+					// error while creating pipe
+					pipe_handle = 0;
+				}
+			}
+
+			*result = Runtime::IntegerObject( static_cast<int>(pipe_handle) );
 		}
 		catch ( std::exception& e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

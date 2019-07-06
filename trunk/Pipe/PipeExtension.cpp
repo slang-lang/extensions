@@ -6,7 +6,7 @@
 
 // Project includes
 #include "PipeClose.h"
-#include "PipeCreate.h"
+#include "PipeOpen.h"
 #include "PipeRead.h"
 #include "PipeWrite.h"
 
@@ -41,7 +41,7 @@ void PipeExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods
 	assert(methods.empty());
 
 	methods.push_back(new PipeClose());
-	methods.push_back(new PipeCreate());
+	methods.push_back(new PipeOpen());
 	methods.push_back(new PipeRead());
 	methods.push_back(new PipeWrite());
 }
