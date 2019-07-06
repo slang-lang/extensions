@@ -17,6 +17,7 @@ INCLUDE(CMake/Base.cmake)
 # this helps debugging dependencies - a lot :)
 #SET_PROPERTY(GLOBAL PROPERTY GLOBAL_DEPENDS_DEBUG_MODE 1)
 
+ADD_SUBDIRECTORY(MessageQueue)
 ADD_SUBDIRECTORY(Mysql)
 ADD_SUBDIRECTORY(Pipe)
 ADD_SUBDIRECTORY(Sqlite3)
