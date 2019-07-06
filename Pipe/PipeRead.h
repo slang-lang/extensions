@@ -42,11 +42,12 @@ public:
 			std::string method_result;
 
 			if ( param_handle > 0 && param_handle < (int)mPipes.size() ) {
-				Pipe& p = mPipes[param_handle];
+				int& p = mPipes[param_handle];
 
 				char buffer[PIPE_BUF];
 
-				int error = read(p.fd[0], buffer, PIPE_BUF);
+				int length = read(p, buffer, PIPE_BUF);
+				buffer[length] = '\0';
 
 				method_result = std::string(buffer);
 			}
