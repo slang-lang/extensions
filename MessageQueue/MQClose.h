@@ -4,11 +4,6 @@
 
 
 // Library includes
-#include <errno.h>
-#include <sys/msg.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 // Project includes
 #include "Defines.h"

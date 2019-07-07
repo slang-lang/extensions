@@ -4,8 +4,14 @@
 
 
 // Library includes
+#include <errno.h>
+#include <fcntl.h>
 #include <limits.h>
 #include <map>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 // Project includes
