@@ -41,7 +41,8 @@ void MQExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods &
 	assert(methods.empty());
 
 	methods.push_back(new MQClose());
-	methods.push_back(new MQOpen());
+	methods.push_back(new MQOpenByID());
+	methods.push_back(new MQOpenByName());
 	methods.push_back(new MQReceive());
 	methods.push_back(new MQSend());
 }
