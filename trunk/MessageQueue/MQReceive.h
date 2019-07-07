@@ -30,6 +30,7 @@ public:
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("wait", Designtime::BoolObject::TYPENAME, false, true));
 
 		setSignature(params);
 	}
@@ -43,6 +44,7 @@ public:
 			ParameterList::const_iterator it = list.begin();
 
 			int param_handle = (*it++).value().toInt();
+			bool param_wait = (*it++).value().toBool();
 
 			std::string method_result;
 			if ( param_handle > 0 && param_handle < (int)mMQs.size() ) {
@@ -50,7 +52,8 @@ public:
 
 				struct Message_t message;
 
-				if ( msgrcv(queue, &message, sizeof message.mtext, 0, 0) != -1 ) {
+				int msgflg = (param_wait ? 0 : IPC_NOWAIT);
+				if ( msgrcv(queue, &message, sizeof message.mtext, 0, msgflg) != -1 ) {
 					method_result = std::string(message.mtext);
 				}
 			}
