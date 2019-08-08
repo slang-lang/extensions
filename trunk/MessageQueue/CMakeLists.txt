@@ -24,5 +24,5 @@ SET(MODULES
 
 add_include(Externals)
 
-build_shared_lib(ObjectiveScriptMessageQueue "${MODULES}")
+build_shared_lib(MessageQueue "${MODULES}")
 
