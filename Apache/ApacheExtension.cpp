@@ -237,3 +237,9 @@ void ApacheExtension::readPostData()
 }
 
 }
+
+
+extern "C" AExtension* factory(void) {
+	return dynamic_cast<AExtension*>( new Apache::ApacheExtension() );
+}
+
