@@ -42,4 +42,4 @@ SET(MODULES
 
 add_include(Externals)
 
-build_shared_lib(ObjectiveScriptSqlite3 "${MODULES}")
+build_shared_lib(Sqlite3 "${MODULES}")

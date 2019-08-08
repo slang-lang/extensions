@@ -24,5 +24,5 @@ SET(MODULES
 
 add_include(Externals)
 
-build_shared_lib(ObjectiveScriptPipe "${MODULES}")
+build_shared_lib(Pipe "${MODULES}")
 
