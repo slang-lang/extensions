@@ -4,7 +4,7 @@ public void Main(int argc, string argv) {
 	int handle = mysql_init();
 	writeln("mysql_init() = " + handle);
 
-	mysql_real_connect(handle, "127.0.0.1", 3306, "root", "", "test_objectivescript");
+	mysql_real_connect(handle, "127.0.0.1", 3306, "root", "root", "ts_parking");
 	writeln("mysql_real_connect()");
 
 	string query = "SELECT * FROM parking_zones";
