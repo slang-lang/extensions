@@ -5,13 +5,13 @@ public void Main(int argc, string argv) modify {
 	int handle = mysql_init();
 	int result_handle = 0;
 
-	handle = mysql_real_connect(handle, "127.0.0.1", 3306, "root", "", "test_objectivescript");
+	handle = mysql_real_connect(handle, "127.0.0.1", 3306, "root", "root", "");
 	if ( !handle ) {
 		print("error while connecting to database!");
 		return;
 	}
 
-	error = mysql_select_db(handle, "test");
+	error = mysql_select_db(handle, "ts_parking");
 	print("mysql_select_db(" + handle + "\"test\") = " + error);
 	if ( error ) {
 		print("error while selecting database: " + error);

@@ -3,7 +3,7 @@
 public void Main(int argc, string argv) {
 	int handle = mysql_init();
 
-	handle = mysql_real_connect(handle, "127.0.0.1", 3306, "root", "", "test_objectivescript");
+	handle = mysql_real_connect(handle, "127.0.0.1", 3306, "root", "root", "ts_parking");
 	if ( !handle ) {
 		writeln("error while connecting to database!");
 		return;
