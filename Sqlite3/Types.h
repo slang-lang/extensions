@@ -5,7 +5,7 @@
 
 // Library includes
 #include <map>
-#include <Externals/sqlite_3.30.1/sqlite3.h>
+#include <sqlite3.h>
 
 // Project includes
 #include "Sqlite3Column.h"
