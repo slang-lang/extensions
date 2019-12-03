@@ -34,7 +34,7 @@ Sqlite3Extension::Sqlite3Extension()
 {
     int result = sqlite3_initialize();
     if ( result != SQLITE_OK ) {
-        std::cout << "Error while initializing sqlite3 extension!" << std::endl;
+        std::cerr << "Error while initializing sqlite3 extension!" << std::endl;
     }
 
     // initialize first connection which acts as invalid handle
