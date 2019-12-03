@@ -1,15 +1,12 @@
 INCLUDE(${PROJECT_SOURCE_DIR}/CMake/Base.cmake)
 
 SET(SOURCES
-#    Externals/sqlite_3.28.0/sqlite3.c
     Externals/sqlite_3.30.1/sqlite3.c
     Sqlite3Extension.cpp
     Types.cpp
 )
 
 SET(HEADERS
-#    Externals/sqlite_3.28.0/sqlite3.h
-#    Externals/sqlite_3.28.0/sqlite3ext.h
     Externals/sqlite_3.30.1/sqlite3.h
     Externals/sqlite_3.30.1/sqlite3ext.h
     Defines.h
