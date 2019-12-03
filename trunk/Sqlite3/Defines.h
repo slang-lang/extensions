@@ -4,7 +4,7 @@
 
 
 // Library includes
-#include <Externals/sqlite328/sqlite3.h>
+#include <Externals/sqlite_3.30.1/sqlite3.h>
 
 // Project includes
 #include <Core/Common/Exceptions.h>
