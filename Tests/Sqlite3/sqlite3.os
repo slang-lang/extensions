@@ -24,10 +24,10 @@ public int Main(int argc, string args) {
                    "INSERT INTO PERSON VALUES(3, 'PAUL', 'JOBS', 24, 'SEATTLE', 9900.0);";
 */
 
-    string query = "SELECT * FROM PERSON";
+	string query = "SELECT * FROM PERSON";
 
 
-    int result = sqlite3_exec(handle, query);
+	int result = sqlite3_exec(handle, query);
 	if ( !result ) {
 	    print("Error " + sqlite3_errcode(handle) + ": " + sqlite3_errmsg(handle));
 	}
@@ -36,9 +36,9 @@ public int Main(int argc, string args) {
 	print("sqlite3_row_count(result): " + sqlite3_row_count(result));
 
 	// get number of fields in result set
-    print("sqlite3_field_count(result): " + sqlite3_field_count(result));
+	print("sqlite3_field_count(result): " + sqlite3_field_count(result));
 
-    // loop over all result rows and fields
+	// loop over all result rows and fields
 	while ( sqlite3_next_row(result) ) {
 	    while ( sqlite3_next_field(result) ) {
 	        print("Row " + sqlite3_row_tell(result) + ", Field " + sqlite3_field_tell(result)
