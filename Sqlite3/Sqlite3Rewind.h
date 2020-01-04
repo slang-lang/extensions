@@ -1,6 +1,6 @@
 
-#ifndef Extensions_Sqlite3RowSeek_h
-#define Extensions_Sqlite3RowSeek_h
+#ifndef Extensions_Sqlite3Rewind_h
+#define Extensions_Sqlite3Rewind_h
 
 
 // Library includes
@@ -17,15 +17,14 @@ using namespace ObjectiveScript;
 namespace Sqlite3 {
 
 
-class Sqlite3RowSeek : public Extensions::ExtensionMethod
+class Sqlite3Rewind : public Extensions::ExtensionMethod
 {
 public:
-	Sqlite3RowSeek()
-	: ExtensionMethod(0, "sqlite3_row_seek", Designtime::VoidObject::TYPENAME)
+	Sqlite3Rewind()
+	: ExtensionMethod(0, "sqlite3_rewind", Designtime::VoidObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("result", Designtime::IntegerObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("offset", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
@@ -39,10 +38,10 @@ public:
 			ParameterList::const_iterator it = list.begin();
 
 			int param_result = (*it++).value().toInt();
-			int param_offset = (*it++).value().toInt();
 
 			if ( param_result > 0 && param_result < (int)mResults.size() ) {
-				mResults[param_result].rowSeek(param_offset);
+				mResults[param_result].rowSeek(0);
+				mResults[param_result].fieldSeek(0);
 			}
 		}
 		catch ( std::exception& e ) {

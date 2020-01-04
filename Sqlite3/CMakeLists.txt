@@ -23,6 +23,7 @@ SET(HEADERS
     Sqlite3NextRow.h
     Sqlite3Open.h
     Sqlite3Result.h
+    Sqlite3Rewind.h
     Sqlite3Row.h
     Sqlite3RowCount.h
     Sqlite3RowSeek.h

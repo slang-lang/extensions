@@ -61,12 +61,12 @@ public:
 class Sqlite3GetFieldValueByIndex : public Extensions::ExtensionMethod
 {
 public:
-    Sqlite3GetFieldValueByIndex()
+	Sqlite3GetFieldValueByIndex()
 	: ExtensionMethod(0, "sqlite3_get_field_value", Designtime::StringObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("result", Designtime::IntegerObject::TYPENAME));
-        params.push_back(Parameter::CreateDesigntime("field_index", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("field_index", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
@@ -83,9 +83,9 @@ public:
 			int param_field_index = (*it++).value().toInt();
 
 			std::string fieldValue;
-            if ( param_result > 0 && param_result < (int)mResults.size() ) {
-                fieldValue = mResults[param_result].getFieldValueByIndex(param_field_index);
-            }
+			if ( param_result > 0 && param_result < (int)mResults.size() ) {
+				fieldValue = mResults[param_result].getFieldValueByIndex(param_field_index);
+			}
 
 			*result = Runtime::StringObject( fieldValue );
 		}
@@ -150,3 +150,4 @@ public:
 
 
 #endif
+
