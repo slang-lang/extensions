@@ -20,12 +20,12 @@ namespace Sqlite3 {
 class Sqlite3FieldSeek : public Extensions::ExtensionMethod
 {
 public:
-    Sqlite3FieldSeek()
+	Sqlite3FieldSeek()
 	: ExtensionMethod(0, "sqlite3_field_seek", Designtime::VoidObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("result", Designtime::IntegerObject::TYPENAME));
-        params.push_back(Parameter::CreateDesigntime("offset", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("offset", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
@@ -39,7 +39,7 @@ public:
 			ParameterList::const_iterator it = list.begin();
 
 			int param_result = (*it++).value().toInt();
-            int param_offset = (*it++).value().toInt();
+			int param_offset = (*it++).value().toInt();
 
 			if ( param_result > 0 && param_result < (int)mResults.size() ) {
 			    mResults[param_result].fieldSeek(param_offset);
