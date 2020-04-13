@@ -50,7 +50,7 @@ public:
 			}
 
 			*result = Runtime::IntegerObject(
-				(int)mysql_errno(myConn)
+				static_cast<int>( mysql_errno(myConn) )
 			);
 		}
 		catch ( std::exception &e ) {

@@ -50,7 +50,7 @@ public:
 			}
 
 			*result = Runtime::IntegerObject(
-				(int)mysql_field_count(myConn)
+				static_cast<int>( mysql_field_count(myConn) )
 			);
 		}
 		catch ( std::exception &e ) {
