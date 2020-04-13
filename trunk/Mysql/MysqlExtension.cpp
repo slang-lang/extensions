@@ -61,6 +61,7 @@ void MysqlExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethod
 	methods.push_back(new Mysql::MysqlErrno());
 	methods.push_back(new Mysql::MysqlError());
 	methods.push_back(new Mysql::MysqlFetchRow());
+	methods.push_back(new Mysql::MysqlFetchRow( "mysql_next_row" ));	// this is kept to be backwards compatible to old implementations that used 'mysql_next_row' instead of 'mysql_fetch_row'
 	methods.push_back(new Mysql::MysqlFieldCount());
 	methods.push_back(new Mysql::MysqlFieldSeek());
 	methods.push_back(new Mysql::MysqlFieldTell());
