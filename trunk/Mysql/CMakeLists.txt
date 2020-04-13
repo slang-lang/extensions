@@ -12,6 +12,7 @@ SET(HEADERS
     MysqlErrno.h
     MysqlError.h
     MysqlExtension.h
+    MysqlFetchRow.h
     MysqlFieldCount.h
     MysqlFieldSeek.h
     MysqlFieldTell.h
@@ -22,7 +23,6 @@ SET(HEADERS
     MysqlInfo.h
     MysqlInit.h
     MysqlNextResult.h
-    MysqlNextRow.h
     MysqlNumFields.h
     MysqlNumRows.h
     MysqlPing.h

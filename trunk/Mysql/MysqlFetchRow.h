@@ -25,11 +25,11 @@ using namespace ObjectiveScript;
 namespace Mysql {
 
 
-class MysqlNextRow : public Extensions::ExtensionMethod
+class MysqlFetchRow : public Extensions::ExtensionMethod
 {
 public:
-	MysqlNextRow()
-	: ExtensionMethod(0, "mysql_next_row", Designtime::BoolObject::TYPENAME)
+	MysqlFetchRow()
+	: ExtensionMethod(0, "mysql_fetch_row", Designtime::BoolObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));

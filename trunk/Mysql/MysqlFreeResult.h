@@ -50,6 +50,7 @@ public:
 			}
 
 			mysql_free_result(myResult);
+			mMysqlResults[param_handle] = 0;
 		}
 		catch ( std::exception &e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

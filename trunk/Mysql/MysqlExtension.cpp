@@ -10,6 +10,7 @@
 #include "MysqlDataSeek.h"
 #include "MysqlErrno.h"
 #include "MysqlError.h"
+#include "MysqlFetchRow.h"
 #include "MysqlFieldCount.h"
 #include "MysqlFieldSeek.h"
 #include "MysqlFieldTell.h"
@@ -20,7 +21,6 @@
 #include "MysqlInfo.h"
 #include "MysqlInit.h"
 #include "MysqlNextResult.h"
-#include "MysqlNextRow.h"
 #include "MysqlNumFields.h"
 #include "MysqlNumRows.h"
 #include "MysqlPing.h"
@@ -60,6 +60,7 @@ void MysqlExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethod
 	methods.push_back(new Mysql::MysqlDataSeek());
 	methods.push_back(new Mysql::MysqlErrno());
 	methods.push_back(new Mysql::MysqlError());
+	methods.push_back(new Mysql::MysqlFetchRow());
 	methods.push_back(new Mysql::MysqlFieldCount());
 	methods.push_back(new Mysql::MysqlFieldSeek());
 	methods.push_back(new Mysql::MysqlFieldTell());
@@ -71,7 +72,6 @@ void MysqlExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethod
 	methods.push_back(new Mysql::MysqlInfo());
 	methods.push_back(new Mysql::MysqlInit());
 	methods.push_back(new Mysql::MysqlNextResult());
-	methods.push_back(new Mysql::MysqlNextRow());
 	methods.push_back(new Mysql::MysqlNumFields());
 	methods.push_back(new Mysql::MysqlNumRows());
 	methods.push_back(new Mysql::MysqlPing());
