@@ -50,7 +50,7 @@ public:
 			}
 
 			*result = Runtime::StringObject(
-				(std::string)mysql_error(myConn)
+				static_cast<std::string>( mysql_error( myConn ) )
 			);
 		}
 		catch ( std::exception &e ) {
