@@ -52,7 +52,7 @@ public:
 					param_message.resize(512);
 				}
 
-				sprintf(message.mtext, "%s", param_message.c_str());
+				snprintf(message.mtext, param_message.size(), "%s", param_message.c_str());
 				message.mtext[param_message.size()] = '\0';
 
 				method_result = msgsnd(queue, &message, param_message.size() + 1, 0);
