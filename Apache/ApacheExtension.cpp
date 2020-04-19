@@ -76,10 +76,10 @@ std::string UriDecode(const std::string & sSrc)
     // but are not followed by two hexadecimal characters (0-9, A-F) are reserved
     // for future extension"
     
-    const unsigned char * pSrc = (const unsigned char *)sSrc.c_str();
+    const auto* pSrc = (const unsigned char*)sSrc.c_str();
     const int SRC_LEN = sSrc.length();
-    const unsigned char * const SRC_END = pSrc + SRC_LEN;
-    const unsigned char * const SRC_LAST_DEC = SRC_END - 2;   // last decodable '%' 
+    const unsigned char* const SRC_END = pSrc + SRC_LEN;
+    const unsigned char* const SRC_LAST_DEC = SRC_END - 2;   // last decodable '%'
 
     char * const pStart = new char[SRC_LEN];
     char * pEnd = pStart;
@@ -111,11 +111,11 @@ std::string UriDecode(const std::string & sSrc)
 std::string UriEncode(const std::string & sSrc)
 {
     const char DEC2HEX[16 + 1] = "0123456789ABCDEF";
-    const unsigned char * pSrc = (const unsigned char *)sSrc.c_str();
+    const auto* pSrc = (const unsigned char *)sSrc.c_str();
     const int SRC_LEN = sSrc.length();
-    unsigned char * const pStart = new unsigned char[SRC_LEN * 3];
+    auto* const pStart = new unsigned char[SRC_LEN * 3];
     unsigned char * pEnd = pStart;
-    const unsigned char * const SRC_END = pSrc + SRC_LEN;
+    const unsigned char* const SRC_END = pSrc + SRC_LEN;
 
     for ( ; pSrc < SRC_END; ++pSrc ) {
 		if ( SAFE[*pSrc] ) {
@@ -168,15 +168,15 @@ void ApacheExtension::readGetData()
 	std::list<char*> stringlist;
 
 	char* base = strtok(query, "&");
-	while ( base != NULL ) {
+	while ( base != nullptr ) {
 		stringlist.push_back(base);
 
-		base = strtok(NULL, "&");
+		base = strtok(nullptr, "&");
 	}
 
-	for ( std::list<char*>::reverse_iterator it = stringlist.rbegin(); it != stringlist.rend(); ++it ) {
+	for ( auto it = stringlist.rbegin(); it != stringlist.rend(); ++it ) {
 		char* key = strtok((*it), "=");
-		char* value = strtok(NULL, "");
+		char* value = strtok(nullptr, "");
 
 		std::string strvalue;
 		if ( value ) {
@@ -198,29 +198,29 @@ void ApacheExtension::readPostData()
 		return;
 	}
 
-	size_t len = strtol(len_, NULL, 10);
+	auto len = strtol(len_, nullptr, 10);
 
-	char* postdata = (char*)malloc(len + 1);
-
+	auto* postdata = (char*)malloc(len + 1);
 	if ( !postdata ) {
-		/* handle error or */
 		exit(EXIT_FAILURE);
 	}
 
-	fgets(postdata, len + 1, stdin);
-
-	std::list<char*> stringlist;
-
-	char* base = strtok(postdata, "&");
-	while ( base != NULL ) {
-		stringlist.push_back(base);
-
-		base = strtok(NULL, "&");
+	if ( !fgets(postdata, len + 1, stdin) ) {
+		exit(EXIT_FAILURE);
 	}
 
-	for ( std::list<char*>::reverse_iterator it = stringlist.rbegin(); it != stringlist.rend(); ++it ) {
+	std::list<char*> stringList;
+
+	char* base = strtok(postdata, "&");
+	while ( base != nullptr ) {
+		stringList.push_back(base);
+
+		base = strtok(nullptr, "&");
+	}
+
+	for ( auto it = stringList.rbegin(); it != stringList.rend(); ++it ) {
 		char* key = strtok((*it), "=");
-		char* value = strtok(NULL, "");
+		char* value = strtok(nullptr, "");
 
 		std::string strvalue;
 		if ( value ) {
