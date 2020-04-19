@@ -141,13 +141,13 @@ ApacheExtension::ApacheExtension()
 {
 }
 
-void ApacheExtension::initialize(ObjectiveScript::IScope* /*scope*/)
+void ApacheExtension::initialize(Slang::IScope* /*scope*/)
 {
 	readGetData();
 	readPostData();
 }
 
-void ApacheExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods)
+void ApacheExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 {
 	assert(methods.empty());
 

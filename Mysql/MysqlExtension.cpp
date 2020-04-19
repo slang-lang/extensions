@@ -46,12 +46,12 @@ MysqlExtension::MysqlExtension()
 {
 }
 
-void MysqlExtension::initialize(ObjectiveScript::IScope* /*scope*/)
+void MysqlExtension::initialize(Slang::IScope* /*scope*/)
 {
 	// nothing to do here
 }
 
-void MysqlExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods)
+void MysqlExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 {
 	assert(methods.empty());
 

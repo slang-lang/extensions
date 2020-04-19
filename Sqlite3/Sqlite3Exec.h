@@ -12,7 +12,7 @@
 // Forward declarations
 
 // Namespace declarations
-using namespace ObjectiveScript;
+using namespace Slang;
 
 
 namespace Sqlite3 {

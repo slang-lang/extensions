@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Apache_ApacheExtension_h
-#define ObjectiveScript_Extensions_Apache_ApacheExtension_h
+#ifndef Slang_Extensions_Apache_ApacheExtension_h
+#define Slang_Extensions_Apache_ApacheExtension_h
 
 
 // Library includes
@@ -22,8 +22,8 @@ class ApacheExtension : public AExtension
 public:
 	ApacheExtension();
 
-	void initialize(ObjectiveScript::IScope* scope);
-	void provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods);
+	void initialize(Slang::IScope* scope);
+	void provideMethods(Slang::Extensions::ExtensionMethods &methods);
 
 private:
 	void readGetData();

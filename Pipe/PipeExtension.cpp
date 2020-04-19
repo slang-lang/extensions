@@ -27,7 +27,7 @@ PipeExtension::~PipeExtension()
 {
 }
 
-void PipeExtension::initialize(ObjectiveScript::IScope* scope)
+void PipeExtension::initialize(Slang::IScope* scope)
 {
 	//std::cout << "PipeExtension::initialize()" << std::endl;
 
@@ -36,7 +36,7 @@ void PipeExtension::initialize(ObjectiveScript::IScope* scope)
 	// global vars/consts currently don't work for extensions :-(
 }
 
-void PipeExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods)
+void PipeExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 {
 	assert(methods.empty());
 

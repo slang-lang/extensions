@@ -49,17 +49,17 @@ Sqlite3Extension::~Sqlite3Extension()
 	sqlite3_shutdown();
 }
 
-void Sqlite3Extension::initialize(ObjectiveScript::IScope* scope)
+void Sqlite3Extension::initialize(Slang::IScope* scope)
 {
 	//std::cout << "Sqlite3Extension::initialize()" << std::endl;
 
 	(void)scope;
 
 	// global vars/consts currently don't work for extensions :-(
-	//scope->define("SQLITE_OK", new ObjectiveScript::Runtime::IntegerObject(SQLITE_OK));
+	//scope->define("SQLITE_OK", new Slang::Runtime::IntegerObject(SQLITE_OK));
 }
 
-void Sqlite3Extension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods)
+void Sqlite3Extension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 {
 	assert(methods.empty());
 

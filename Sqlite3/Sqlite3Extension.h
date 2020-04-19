@@ -24,8 +24,8 @@ public:
     ~Sqlite3Extension();
 
 public:
-    void initialize(ObjectiveScript::IScope* scope);
-    void provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods);
+    void initialize(Slang::IScope* scope);
+    void provideMethods(Slang::Extensions::ExtensionMethods &methods);
 };
 
 

@@ -27,7 +27,7 @@ MQExtension::~MQExtension()
 {
 }
 
-void MQExtension::initialize(ObjectiveScript::IScope* scope)
+void MQExtension::initialize(Slang::IScope* scope)
 {
 	//std::cout << "MQExtension::initialize()" << std::endl;
 
@@ -36,7 +36,7 @@ void MQExtension::initialize(ObjectiveScript::IScope* scope)
 	// global vars/consts currently don't work for extensions :-(
 }
 
-void MQExtension::provideMethods(ObjectiveScript::Extensions::ExtensionMethods &methods)
+void MQExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 {
 	assert(methods.empty());
 

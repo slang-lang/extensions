@@ -1,7 +1,7 @@
 #!/bin/bash
 
 EXCLUDES="--exclude=.* --exclude=cmake-build*"
-RELEASE="ObjectiveScript-Extensions_`svnversion`.tar.gz"
+RELEASE="Slang-Extensions_`svnversion`.tar.gz"
 
 echo "Packing files for release ${RELEASE} ..."
 

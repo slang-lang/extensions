@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Apache_Post_h
-#define ObjectiveScript_Extensions_Apache_Post_h
+#ifndef Slang_Extensions_Apache_Post_h
+#define Slang_Extensions_Apache_Post_h
 
 
 // Library includes
@@ -12,7 +12,7 @@
 // Forward declarations
 
 // Namespace declarations
-using namespace ObjectiveScript;
+using namespace Slang;
 
 
 namespace Apache {

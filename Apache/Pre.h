@@ -1,6 +1,6 @@
 
-#ifndef ObjectiveScript_Extensions_Apache_Pre_h
-#define ObjectiveScript_Extensions_Apache_Pre_h
+#ifndef Slang_Extensions_Apache_Pre_h
+#define Slang_Extensions_Apache_Pre_h
 
 
 // Library includes
@@ -11,7 +11,7 @@
 // Forward declarations
 
 // Namespace declarations
-using namespace ObjectiveScript;
+using namespace Slang;
 
 
 #define APACHEEXT_VARPREFIX '$'
