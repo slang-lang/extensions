@@ -41,4 +41,4 @@ SET(MODULES
 
 add_include(Externals)
 
-build_shared_lib(Sqlite3 "${MODULES}")
+build_shared_lib(ExtSqlite3 "${MODULES}")

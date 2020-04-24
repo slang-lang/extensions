@@ -50,6 +50,11 @@ endfunction()
 
 function(_handle_modules_pre_linker modules)
 
+    list(FIND modules "json" found)
+    if ( ${found} GREATER -1 )
+        _handle_pre_json()
+    endif()
+
     list(FIND modules "mysql" found)
     if ( ${found} GREATER -1 )
         _handle_pre_mysql()
@@ -70,6 +75,11 @@ endfunction()
 
 function(_handle_modules_post_linker modules target)
 
+    list(FIND modules "json" found)
+    if ( ${found} GREATER -1 )
+        _handle_post_json(${target})
+    endif()
+
     list(FIND modules "mysql" found)
     if ( ${found} GREATER -1 )
         _handle_post_mysql(${target})
@@ -87,6 +97,55 @@ function(_handle_modules_post_linker modules target)
 
 endfunction()
 
+
+###############################
+### JSON
+
+function(_could_not_find_json)
+    MESSAGE(STATUS "Could not find (the correct version of) Json.")
+    MESSAGE(STATUS "Slang currently requires ${JSON_PACKAGE_NAME}\n")
+    MESSAGE(FATAL_ERROR "You can download from ${JSON_DOWNLOAD_URL}")
+endfunction()
+
+
+function(_json_check_existence)
+
+    # make sure the appropriate environment variable is set!
+    if(NOT BUILD_JSON_INC)
+        _could_not_find_json()
+    else()
+
+        if("${BUILD_JSON_INC}" STREQUAL "")
+            MESSAGE(FATAL_ERROR "BUILD_JSON_INC needed for json!")
+        endif()
+
+        if("${BUILD_JSON_LIB}" STREQUAL "")
+            MESSAGE(FATAL_ERROR "BUILD_JSON_LIB needed for json!")
+        endif()
+
+    endif()
+
+endfunction()
+
+
+function(_handle_post_json target)
+
+    _json_check_existence()
+    target_link_libraries(${target} Json)
+
+endfunction()
+
+
+function(_handle_pre_json)
+
+    _json_check_existence()
+    include_directories(${BUILD_JSON_INC})
+    link_directories(${BUILD_JSON_LIB})
+
+endfunction()
+
+### JSON
+###############################
 
 ###############################
 ### MYSQL

@@ -48,4 +48,4 @@ SET(MODULES
     oscript
 )
 
-build_shared_lib(Mysql "${MODULES}")
+build_shared_lib(ExtMysql "${MODULES}")
