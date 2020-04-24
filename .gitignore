@@ -1,11 +1,4 @@
-.idea/.gitignore
-.idea/.name
-.idea/misc.xml
-.idea/modules.xml
-.idea/src.iml
-.idea/vcs.xml
-.idea/codeStyles/codeStyleConfig.xml
-.idea/codeStyles/Project.xml
-.vscode/c_cpp_properties.json
+.idea
+.vscode
 build
 cmake-build-debug
