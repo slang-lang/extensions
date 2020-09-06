@@ -45,7 +45,7 @@ SET(DEPENDENCIES
 
 SET(MODULES
     mysql
-    oscript
+    slang
 )
 
 build_shared_lib(ExtMysql "${MODULES}")

@@ -16,7 +16,7 @@ SET(DEPENDENCIES
 
 SET(MODULES
 	json
-	oscript
+	slang
 )
 
 build_shared_lib(ExtJson "${MODULES}")

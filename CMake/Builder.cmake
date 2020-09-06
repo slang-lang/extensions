@@ -60,9 +60,9 @@ function(_handle_modules_pre_linker modules)
         _handle_pre_mysql()
     endif()
 
-    list(FIND modules "oscript" found)
+    list(FIND modules "slang" found)
     if ( ${found} GREATER -1 )
-        _handle_pre_oscript()
+        _handle_pre_slang()
     endif()
 
     list(FIND modules "sqlite3" found)
@@ -85,9 +85,9 @@ function(_handle_modules_post_linker modules target)
         _handle_post_mysql(${target})
     endif()
 
-    list(FIND modules "oscript" found)
+    list(FIND modules "slang" found)
     if ( ${found} GREATER -1 )
-        _handle_post_oscript(${target})
+        _handle_post_slang(${target})
     endif()
 
     list(FIND modules "sqlite3" found)
@@ -185,22 +185,22 @@ endfunction()
 ###############################
 ### ObjectiveScript
 
-function(_oscript_check_existence)
+function(_slang_check_existence)
 
     # make sure the appropriate environment variable is set!
-    if("${BUILD_OSCRIPT_INC}" STREQUAL "")
-        MESSAGE(FATAL_ERROR "BUILD_OSCRIPT_INC needed for ObjectiveScript!")
+    if("${BUILD_SLANG_INC}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_SLANG_INC needed for ObjectiveScript!")
     endif()
 
-    if("${BUILD_OSCRIPT_LIB}" STREQUAL "")
-        MESSAGE(FATAL_ERROR "BUILD_OSCRIPT_LIB needed for ObjectiveScript!")
+    if("${BUILD_SLANG_LIB}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_SLANG_LIB needed for ObjectiveScript!")
     endif()
 
 endfunction()
 
-function(_handle_post_oscript target)
+function(_handle_post_slang target)
 
-    _oscript_check_existence()
+    _slang_check_existence()
     target_link_libraries(${target} UtilsTools)
     target_link_libraries(${target} Utils)
     target_link_libraries(${target} CoreVirtualMachine)
@@ -218,11 +218,11 @@ function(_handle_post_oscript target)
 
 endfunction()
 
-function(_handle_pre_oscript)
+function(_handle_pre_slang)
 
-    _oscript_check_existence()
-    include_directories(${BUILD_OSCRIPT_INC})
-    link_directories(${BUILD_OSCRIPT_LIB})
+    _slang_check_existence()
+    include_directories(${BUILD_SLANG_INC})
+    link_directories(${BUILD_SLANG_LIB})
 
 endfunction()
 

@@ -36,7 +36,7 @@ SET(DEPENDENCIES
 )
 
 SET(MODULES
-    oscript
+    slang
 )
 
 add_include(Externals)
