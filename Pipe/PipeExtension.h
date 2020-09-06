@@ -17,15 +17,15 @@
 namespace Pipe {
 
 
-class PipeExtension : public AExtension
+class PipeExtension : public Slang::Extensions::AExtension
 {
 public:
     PipeExtension();
     ~PipeExtension();
 
 public:
-    void initialize(Slang::IScope* scope);
-    void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+    void initialize( Slang::IScope* scope );
+    void provideMethods( Slang::Extensions::ExtensionMethods& methods );
 };
 
 

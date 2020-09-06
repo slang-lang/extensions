@@ -28,8 +28,8 @@ namespace Mysql {
 class MysqlFetchRow : public Extensions::ExtensionMethod
 {
 public:
-	MysqlFetchRow( const std::string& overrideName = "mysql_fetch_row" )
-	: ExtensionMethod(0, overrideName, Designtime::BoolObject::TYPENAME)
+	MysqlFetchRow( const std::string& overrideName = "mysql_fetch_row", Slang::LanguageFeatureState::E languageFeatureState = Slang::LanguageFeatureState::Stable )
+	: ExtensionMethod( 0, overrideName, Designtime::BoolObject::TYPENAME, Mutability::Const, MemoryLayout::Static, languageFeatureState )
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));

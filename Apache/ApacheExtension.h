@@ -17,13 +17,13 @@
 namespace Apache {
 
 
-class ApacheExtension : public AExtension
+class ApacheExtension : public Slang::Extensions::AExtension
 {
 public:
 	ApacheExtension();
 
-	void initialize(Slang::IScope* scope);
-	void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+	void initialize( Slang::IScope* scope );
+	void provideMethods( Slang::Extensions::ExtensionMethods& methods );
 
 private:
 	void readGetData();

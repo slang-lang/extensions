@@ -31,7 +31,7 @@ namespace Sqlite3 {
 
 
 Sqlite3Extension::Sqlite3Extension()
-: AExtension("Sqlite3")
+: AExtension( "Sqlite3", "0.0.1" )
 {
 	int result = sqlite3_initialize();
 	if ( result != SQLITE_OK ) {
@@ -49,7 +49,7 @@ Sqlite3Extension::~Sqlite3Extension()
 	sqlite3_shutdown();
 }
 
-void Sqlite3Extension::initialize(Slang::IScope* scope)
+void Sqlite3Extension::initialize( Slang::IScope* scope )
 {
 	//std::cout << "Sqlite3Extension::initialize()" << std::endl;
 
@@ -59,37 +59,37 @@ void Sqlite3Extension::initialize(Slang::IScope* scope)
 	//scope->define("SQLITE_OK", new Slang::Runtime::IntegerObject(SQLITE_OK));
 }
 
-void Sqlite3Extension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
+void Sqlite3Extension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
-	assert(methods.empty());
+	assert( methods.empty() );
 
-	methods.push_back(new Sqlite3Close());
-	methods.push_back(new Sqlite3Errcode());
-	methods.push_back(new Sqlite3Errmsg());
-	methods.push_back(new Sqlite3Exec());
-	methods.push_back(new Sqlite3FieldCount());
-	methods.push_back(new Sqlite3FieldSeek());
-	methods.push_back(new Sqlite3FieldTell());
-	methods.push_back(new Sqlite3FreeResult());
-	methods.push_back(new Sqlite3GetFieldName());
-	methods.push_back(new Sqlite3GetFieldNameByIndex());
-	methods.push_back(new Sqlite3GetFieldValue());
-	methods.push_back(new Sqlite3GetFieldValueByIndex());
-	methods.push_back(new Sqlite3GetFieldValueByName());
-	methods.push_back(new Sqlite3NextField());
-	methods.push_back(new Sqlite3NextRow());
-	methods.push_back(new Sqlite3Open());
-	methods.push_back(new Sqlite3Rewind());
-	methods.push_back(new Sqlite3RowCount());
-	methods.push_back(new Sqlite3RowSeek());
-	methods.push_back(new Sqlite3RowTell());
+	methods.push_back( new Sqlite3Close() );
+	methods.push_back( new Sqlite3Errcode() );
+	methods.push_back( new Sqlite3Errmsg() );
+	methods.push_back( new Sqlite3Exec() );
+	methods.push_back( new Sqlite3FieldCount() );
+	methods.push_back( new Sqlite3FieldSeek() );
+	methods.push_back( new Sqlite3FieldTell() );
+	methods.push_back( new Sqlite3FreeResult() );
+	methods.push_back( new Sqlite3GetFieldName() );
+	methods.push_back( new Sqlite3GetFieldNameByIndex() );
+	methods.push_back( new Sqlite3GetFieldValue() );
+	methods.push_back( new Sqlite3GetFieldValueByIndex() );
+	methods.push_back( new Sqlite3GetFieldValueByName() );
+	methods.push_back( new Sqlite3NextField() );
+	methods.push_back( new Sqlite3NextRow() );
+	methods.push_back( new Sqlite3Open() );
+	methods.push_back( new Sqlite3Rewind() );
+	methods.push_back( new Sqlite3RowCount() );
+	methods.push_back( new Sqlite3RowSeek() );
+	methods.push_back( new Sqlite3RowTell() );
 }
 
 
 }
 
 
-extern "C" AExtension* factory(void) {
-	return dynamic_cast<AExtension*>( new Sqlite3::Sqlite3Extension() );
+extern "C" Slang::Extensions::AExtension* factory( void ) {
+	return dynamic_cast<Slang::Extensions::AExtension*>( new Sqlite3::Sqlite3Extension() );
 }
 

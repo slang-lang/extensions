@@ -17,7 +17,7 @@ namespace Pipe {
 
 
 PipeExtension::PipeExtension()
-: AExtension("Pipe")
+: AExtension( "Pipe", "0.0.1" )
 {
 	// initialize pipes
 	mPipes[0];
@@ -27,7 +27,7 @@ PipeExtension::~PipeExtension()
 {
 }
 
-void PipeExtension::initialize(Slang::IScope* scope)
+void PipeExtension::initialize( Slang::IScope* scope )
 {
 	//std::cout << "PipeExtension::initialize()" << std::endl;
 
@@ -36,21 +36,21 @@ void PipeExtension::initialize(Slang::IScope* scope)
 	// global vars/consts currently don't work for extensions :-(
 }
 
-void PipeExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
+void PipeExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
-	assert(methods.empty());
+	assert( methods.empty() );
 
-	methods.push_back(new PipeClose());
-	methods.push_back(new PipeOpen());
-	methods.push_back(new PipeRead());
-	methods.push_back(new PipeWrite());
+	methods.push_back( new PipeClose() );
+	methods.push_back( new PipeOpen() );
+	methods.push_back( new PipeRead() );
+	methods.push_back( new PipeWrite() );
 }
 
 
 }
 
 
-extern "C" AExtension* factory(void) {
-	return dynamic_cast<AExtension*>( new Pipe::PipeExtension() );
+extern "C" Slang::Extensions::AExtension* factory( void ) {
+	return dynamic_cast<Slang::Extensions::AExtension*>( new Pipe::PipeExtension() );
 }
 

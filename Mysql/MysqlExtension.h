@@ -16,14 +16,14 @@
 namespace Mysql {
 
 
-class MysqlExtension : public AExtension
+class MysqlExtension : public Slang::Extensions::AExtension
 {
 public:
 	MysqlExtension();
 
 public:
-	void initialize(Slang::IScope* scope);
-	void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+	void initialize( Slang::IScope* scope );
+	void provideMethods( Slang::Extensions::ExtensionMethods& methods );
 };
 
 

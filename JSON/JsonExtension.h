@@ -22,8 +22,8 @@ public:
 	JsonExtension();
 
 public:
-	void initialize(Slang::IScope* scope);
-	void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+	void initialize( Slang::IScope* scope );
+	void provideMethods( Slang::Extensions::ExtensionMethods& methods );
 };
 
 

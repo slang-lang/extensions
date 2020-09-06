@@ -17,7 +17,7 @@ namespace MQ {
 
 
 MQExtension::MQExtension()
-: AExtension("MQ")
+: AExtension( "MQ", "0.0.1" )
 {
 	// initialize pipes
 	mMQs[0];
@@ -27,7 +27,7 @@ MQExtension::~MQExtension()
 {
 }
 
-void MQExtension::initialize(Slang::IScope* scope)
+void MQExtension::initialize( Slang::IScope* scope )
 {
 	//std::cout << "MQExtension::initialize()" << std::endl;
 
@@ -36,22 +36,22 @@ void MQExtension::initialize(Slang::IScope* scope)
 	// global vars/consts currently don't work for extensions :-(
 }
 
-void MQExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
+void MQExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
-	assert(methods.empty());
+	assert( methods.empty() );
 
-	methods.push_back(new MQClose());
-	methods.push_back(new MQOpenByID());
-	methods.push_back(new MQOpenByName());
-	methods.push_back(new MQReceive());
-	methods.push_back(new MQSend());
+	methods.push_back( new MQClose() );
+	methods.push_back( new MQOpenByID() );
+	methods.push_back( new MQOpenByName() );
+	methods.push_back( new MQReceive() );
+	methods.push_back( new MQSend() );
 }
 
 
 }
 
 
-extern "C" AExtension* factory(void) {
-	return dynamic_cast<AExtension*>( new MQ::MQExtension() );
+extern "C" Slang::Extensions::AExtension* factory( void ) {
+	return dynamic_cast<Slang::Extensions::AExtension*>( new MQ::MQExtension() );
 }
 

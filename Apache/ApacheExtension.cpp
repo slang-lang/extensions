@@ -137,29 +137,29 @@ std::string UriEncode(const std::string & sSrc)
 
 
 ApacheExtension::ApacheExtension()
-: AExtension("Apache")
+: AExtension( "Apache", "0.0.1" )
 {
 }
 
-void ApacheExtension::initialize(Slang::IScope* /*scope*/)
+void ApacheExtension::initialize( Slang::IScope* /*scope*/ )
 {
 	readGetData();
 	readPostData();
 }
 
-void ApacheExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
+void ApacheExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
-	assert(methods.empty());
+	assert( methods.empty() );
 
-	methods.push_back(new Get());
-	methods.push_back(new IsSet());
-	methods.push_back(new Post());
-	methods.push_back(new Pre());
+	methods.push_back( new Get() );
+	methods.push_back( new IsSet() );
+	methods.push_back( new Post() );
+	methods.push_back( new Pre() );
 }
 
 void ApacheExtension::readGetData()
 {
-	char *query = getenv(QUERY_STRING);
+	char *query = getenv( QUERY_STRING );
 	if ( !query ) {
 		// ups
 		return;
@@ -239,7 +239,7 @@ void ApacheExtension::readPostData()
 }
 
 
-extern "C" AExtension* factory(void) {
-	return dynamic_cast<AExtension*>( new Apache::ApacheExtension() );
+extern "C" Slang::Extensions::AExtension* factory( void ) {
+	return dynamic_cast<Slang::Extensions::AExtension*>( new Apache::ApacheExtension() );
 }
 

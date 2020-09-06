@@ -17,15 +17,15 @@
 namespace Sqlite3 {
 
 
-class Sqlite3Extension : public AExtension
+class Sqlite3Extension : public Slang::Extensions::AExtension
 {
 public:
     Sqlite3Extension();
     ~Sqlite3Extension();
 
 public:
-    void initialize(Slang::IScope* scope);
-    void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+    void initialize( Slang::IScope* scope );
+    void provideMethods( Slang::Extensions::ExtensionMethods& methods );
 };
 
 
