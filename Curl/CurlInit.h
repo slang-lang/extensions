@@ -38,6 +38,8 @@ public:
 	{
 		try {
 			//CURL* handle = curl_easy_init();
+
+			// duplicate base handle, since we want to inherit all of its already set options
 			CURL* handle = curl_easy_duphandle( mHandles[0] );
 
 			int my_result = 0;
@@ -45,7 +47,7 @@ public:
 				my_result = ++mNumHandles;
 
 				mHandles.insert(std::make_pair(my_result, handle));
-				mResults.insert(std::make_pair(my_result, ""));
+				mResults.insert(std::make_pair(my_result, std::string()));
 			}
 
 			*result = Runtime::IntegerObject(my_result);
