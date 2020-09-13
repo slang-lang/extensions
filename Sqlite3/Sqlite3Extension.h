@@ -1,6 +1,6 @@
 
-#ifndef Extensions_Sqlite3Extension_h
-#define Extensions_Sqlite3Extension_h
+#ifndef Extensions_Sqlite3_Sqlite3Extension_h
+#define Extensions_Sqlite3_Sqlite3Extension_h
 
 
 // Library includes

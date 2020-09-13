@@ -1,6 +1,6 @@
 
-#ifndef Extensions_PipeExtension_h
-#define Extensions_PipeExtension_h
+#ifndef Extensions_Pipe_PipeExtension_h
+#define Extensions_Pipe_PipeExtension_h
 
 
 // Library includes

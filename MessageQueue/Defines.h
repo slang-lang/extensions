@@ -1,6 +1,6 @@
 
-#ifndef Extensions_Pipe_Defines_h
-#define Extensions_Pipe_Defines_h
+#ifndef Extensions_MQ_Defines_h
+#define Extensions_MQ_Defines_h
 
 
 // Library includes
@@ -23,7 +23,7 @@
 // Namespace declarations
 
 
-namespace Pipe {
+namespace MQ {
 
 
 }

@@ -39,7 +39,7 @@ Sqlite3Extension::Sqlite3Extension()
 	}
 
 	// initialize first connection which acts as invalid handle
-	mConnections[0] = NULL;
+	mConnections[0] = nullptr;
 	// initialize first result which acts as invalid result "handle"
 	mResults[0] = Sqlite3Result();
 }

@@ -98,6 +98,79 @@ function(_handle_modules_post_linker modules target)
 endfunction()
 
 
+
+###############################
+### APACHE
+
+function(_apache_check_existence)
+
+    # make sure the appropriate environment variable is set!
+    if("${BUILD_APACHE_INC}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_APACHE_INC needed for mysql!")
+    endif()
+
+    if("${BUILD_APACHE_LIB}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_APACHE_LIB needed for mysql!")
+    endif()
+
+endfunction()
+
+
+function(_handle_post_apache target)
+
+    _apache_check_existence()
+    #target_link_libraries(${target} mysqlclient)
+
+endfunction()
+
+
+function(_handle_pre_apache)
+
+    _apache_check_existence()
+    include_directories(${BUILD_APACHE_INC})
+    link_directories(${BUILD_APACHE_LIB})
+
+endfunction()
+
+### APACHE
+###############################
+
+
+###############################
+### CURL
+
+function(_curl_check_existence)
+
+    # make sure the appropriate environment variable is set!
+    if("${BUILD_CURL_INC}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_CURL_INC needed for curl!")
+    endif()
+
+    if("${BUILD_CURL_LIB}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_CURL_LIB needed for curl!")
+    endif()
+
+endfunction()
+
+
+function(_handle_post_curl target)
+
+    _curl_check_existence()
+    target_link_libraries(${target} curl)
+
+endfunction()
+
+
+function(_handle_pre_curl)
+
+    _curl_check_existence()
+    include_directories(${BUILD_CURL_INC})
+
+endfunction()
+
+### CURL
+###############################
+
 ###############################
 ### JSON
 
@@ -163,12 +236,14 @@ function(_mysql_check_existence)
 
 endfunction()
 
+
 function(_handle_post_mysql target)
 
     _mysql_check_existence()
     target_link_libraries(${target} mysqlclient)
 
 endfunction()
+
 
 function(_handle_pre_mysql)
 
@@ -183,20 +258,21 @@ endfunction()
 
 
 ###############################
-### ObjectiveScript
+### Slang
 
 function(_slang_check_existence)
 
     # make sure the appropriate environment variable is set!
     if("${BUILD_SLANG_INC}" STREQUAL "")
-        MESSAGE(FATAL_ERROR "BUILD_SLANG_INC needed for ObjectiveScript!")
+        MESSAGE(FATAL_ERROR "BUILD_SLANG_INC needed for Slang!")
     endif()
 
     if("${BUILD_SLANG_LIB}" STREQUAL "")
-        MESSAGE(FATAL_ERROR "BUILD_SLANG_LIB needed for ObjectiveScript!")
+        MESSAGE(FATAL_ERROR "BUILD_SLANG_LIB needed for Slang!")
     endif()
 
 endfunction()
+
 
 function(_handle_post_slang target)
 
@@ -218,6 +294,7 @@ function(_handle_post_slang target)
 
 endfunction()
 
+
 function(_handle_pre_slang)
 
     _slang_check_existence()
@@ -226,7 +303,7 @@ function(_handle_pre_slang)
 
 endfunction()
 
-### ObjectiveScript
+### Slang
 ###############################
 
 ###############################
@@ -245,12 +322,14 @@ function(_sqlite3_check_existence)
 
 endfunction()
 
+
 function(_handle_post_sqlite3 target)
 
     _sqlite3_check_existence()
     target_link_libraries(${target} sqlite)
 
 endfunction()
+
 
 function(_handle_pre_sqlite3)
 
