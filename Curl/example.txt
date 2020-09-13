@@ -1,0 +1,41 @@
+
+	CURL *curl_handle;
+	FILE *pagefile;
+	bool result = false;
+
+	/* init the curl session */
+	curl_handle = curl_easy_init();
+
+	/* set URL to get here */
+	curl_easy_setopt(curl_handle, CURLOPT_URL, url.c_str());
+
+	/* Switch on full protocol/debug output while testing */
+	curl_easy_setopt(curl_handle, CURLOPT_VERBOSE, 0L);
+
+	/* disable progress meter, set to 0L to enable and disable debug output */
+	curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 1L);
+
+	/* send all data to this function  */
+	curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_data);
+
+	/* open the file */
+	pagefile = fopen(target.c_str(), "wb");
+	if ( pagefile ) {
+		/* write the page body to this file handle */
+		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, pagefile);
+
+		/* get it! */
+		curl_easy_perform(curl_handle);
+
+		/* close the header file */
+		fclose(pagefile);
+
+		if ( allowCleanup ) {
+			mDownloadedFiles.push_back(target);
+		}
+
+		result = true;
+	}
+
+	/* cleanup curl stuff */
+	curl_easy_cleanup(curl_handle);
