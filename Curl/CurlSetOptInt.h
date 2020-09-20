@@ -1,6 +1,6 @@
 
-#ifndef Extensions_Curl_CurlSetPassword_h
-#define Extensions_Curl_CurlSetPassword_h
+#ifndef Extensions_Curl_CurlSetOptInt_h
+#define Extensions_Curl_CurlSetOptInt_h
 
 
 // Library include
@@ -22,15 +22,16 @@ using namespace Slang;
 namespace Curl {
 
 
-class CurlSetPassword: public Extensions::ExtensionMethod
+class CurlSetOptInt : public Extensions::ExtensionMethod
 {
 public:
-	CurlSetPassword()
-	: ExtensionMethod(0, "curl_set_password", Designtime::VoidObject::TYPENAME, Mutability::Modify)
+	CurlSetOptInt()
+	: ExtensionMethod(0, "curl_set_opt_int", Designtime::VoidObject::TYPENAME, Mutability::Modify)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("password", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("option", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("value", Designtime::IntegerObject::TYPENAME));
 
 		setSignature(params);
 	}
@@ -42,12 +43,13 @@ public:
 			ParameterList::const_iterator it = params.begin();
 
 			auto param_handle = (*it++).value().toInt();
-			auto param_password = (*it++).value().toStdString();
+			auto param_option = (*it++).value().toInt();
+			auto param_value = (*it++).value().toInt();
 
 			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
 				CURL* handle = mHandles[param_handle];
 
-				curl_easy_setopt(handle, CURLOPT_PASSWORD, param_password.c_str());
+				curl_easy_setopt(handle, static_cast<CURLoption>( param_option ), param_value);
 			}
 		}
 		catch ( std::exception &e ) {

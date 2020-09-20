@@ -10,6 +10,8 @@
 #include "CurlPerform.h"
 #include "CurlReadResult.h"
 #include "CurlReset.h"
+#include "CurlSetOptInt.h"
+#include "CurlSetOptStr.h"
 #include "CurlSetPassword.h"
 #include "CurlSetProgress.h"
 #include "CurlSetUrl.h"
@@ -65,6 +67,8 @@ void CurlExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 	methods.push_back(new CurlPerform());
 	methods.push_back(new CurlReadResult());
 	methods.push_back(new CurlReset());
+	methods.push_back(new CurlSetOptInt());
+	methods.push_back(new CurlSetOptStr());
 	methods.push_back(new CurlSetPassword());
 	methods.push_back(new CurlSetProgress());
 	methods.push_back(new CurlSetUrl());

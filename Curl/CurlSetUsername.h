@@ -30,7 +30,7 @@ public:
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("url", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("username", Designtime::StringObject::TYPENAME));
 
 		setSignature(params);
 	}

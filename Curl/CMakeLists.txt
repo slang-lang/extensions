@@ -13,6 +13,8 @@ SET(HEADERS
     CurlPerform.h
     CurlReadResult.h
     CurlReset.h
+    CurlSetOptInt.h
+    CurlSetOptStr.h
     CurlSetPassword.h
     CurlSetProgress.h
     CurlSetUrl.h
