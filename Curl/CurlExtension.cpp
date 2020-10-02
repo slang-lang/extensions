@@ -10,6 +10,8 @@
 #include "CurlPerform.h"
 #include "CurlReadResult.h"
 #include "CurlReset.h"
+#include "CurlSetBearer.h"
+#include "CurlSetHeader.h"
 #include "CurlSetOptInt.h"
 #include "CurlSetOptStr.h"
 #include "CurlSetPassword.h"
@@ -33,7 +35,7 @@ static size_t write_data(void *contents, size_t size, size_t nmemb, void *stream
 
 
 CurlExtension::CurlExtension()
-: Slang::Extensions::AExtension( "Curl", "0.0.1" )
+: Slang::Extensions::AExtension( "Curl", "0.1.0" )
 {
 	curl_global_init(CURL_GLOBAL_ALL);
 
@@ -67,6 +69,8 @@ void CurlExtension::provideMethods(Slang::Extensions::ExtensionMethods &methods)
 	methods.push_back(new CurlPerform());
 	methods.push_back(new CurlReadResult());
 	methods.push_back(new CurlReset());
+	methods.push_back(new CurlSetBearer());
+	methods.push_back(new CurlSetHeader());
 	methods.push_back(new CurlSetOptInt());
 	methods.push_back(new CurlSetOptStr());
 	methods.push_back(new CurlSetPassword());
