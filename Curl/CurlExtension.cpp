@@ -25,7 +25,6 @@
 
 namespace Curl {
 
-
 static size_t write_data(void *contents, size_t size, size_t nmemb, void *stream)
 {
 	((std::string*)stream)->append((char*)contents, size * nmemb);
@@ -38,6 +37,11 @@ CurlExtension::CurlExtension()
 : Slang::Extensions::AExtension( "Curl", "0.1.0" )
 {
 	curl_global_init(CURL_GLOBAL_ALL);
+
+	auto* curl = curl_version_info( CURLVERSION_NOW );
+	//std::cout << std::string( curl->version ) << std::endl;
+
+	mName = "Curl (using libCurl " + std::string( curl->version ) + ")";
 
 	// initialize handles
 	mHandles[0] = curl_easy_init();

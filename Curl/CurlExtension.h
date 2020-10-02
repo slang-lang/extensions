@@ -21,11 +21,11 @@ class CurlExtension : public Slang::Extensions::AExtension
 {
 public:
 	CurlExtension();
-    ~CurlExtension();
+	~CurlExtension();
 
 public:
-    void initialize(Slang::IScope* scope);
-    void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+	void initialize(Slang::IScope* scope);
+	void provideMethods(Slang::Extensions::ExtensionMethods &methods);
 };
 
 
