@@ -19,4 +19,4 @@ SET(MODULES
 	slang
 )
 
-build_shared_lib(ExtJson "${MODULES}")
+build_shared_lib(SlangJson "${MODULES}")

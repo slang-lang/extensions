@@ -39,19 +39,18 @@ public:
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* /*result*/, const Token& token)
 	{
 		try {
-			ParameterList::const_iterator it = params.begin();
+			auto it = params.cbegin();
+			auto paramHandle = (*it++).value().toInt();
+			auto paramBearer = (*it++).value().toStdString();
 
-			auto param_handle = (*it++).value().toInt();
-			auto param_bearer = (*it++).value().toStdString();
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
+				auto& request = mRequests[paramHandle];
 
-			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
-				CURL* handle = mHandles[param_handle];
-
-				curl_easy_setopt(handle, CURLOPT_XOAUTH2_BEARER, param_bearer.c_str());
+				curl_easy_setopt( request.Handle, CURLOPT_XOAUTH2_BEARER, paramBearer.c_str() );
 #ifdef CURLAUTH_BEARER
-				curl_easy_setopt(handle, CURLOPT_HTTPAUTH, CURLAUTH_BEARER);
+				curl_easy_setopt( request.Handle, CURLOPT_HTTPAUTH, CURLAUTH_BEARER );
 #else
-				curl_easy_setopt(handle, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+				curl_easy_setopt( request.Handle, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 #endif
 			}
 		}

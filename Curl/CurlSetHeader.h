@@ -7,6 +7,8 @@
 
 // Project includes
 #include <Core/Designtime/BuildInTypes/IntegerObject.h>
+#include <Core/Designtime/BuildInTypes/StringObject.h>
+#include <Core/Designtime/BuildInTypes/VoidObject.h>
 #include <Core/Extensions/ExtensionMethod.h>
 #include <Core/Runtime/BuildInTypes/IntegerObject.h>
 #include <Core/Runtime/BuildInTypes/StringObject.h>
@@ -35,19 +37,17 @@ public:
 		setSignature(params);
 	}
 
-
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* /*result*/, const Token& token)
 	{
 		try {
-			ParameterList::const_iterator it = params.begin();
+			auto it = params.cbegin();
+			auto paramHandle = (*it++).value().toInt();
+			auto paramHeader = (*it++).value().toStdString();
 
-			auto param_handle = (*it++).value().toInt();
-			auto param_header = (*it++).value().toStdString();
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
+				auto& request = mRequests[paramHandle];
 
-			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
-				CURL* handle = mHandles[param_handle];
-
-				curl_easy_setopt(handle, CURLOPT_HEADER, param_header.c_str());
+				curl_easy_setopt( request.Handle, CURLOPT_HEADER, paramHeader.c_str() );
 			}
 		}
 		catch ( std::exception &e ) {

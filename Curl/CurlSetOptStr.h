@@ -40,16 +40,15 @@ public:
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* /*result*/, const Token& token)
 	{
 		try {
-			ParameterList::const_iterator it = params.begin();
+			auto it = params.cbegin();
+			auto paramHandle = (*it++).value().toInt();
+			auto paramOption = (*it++).value().toInt();
+			auto paramValue = (*it++).value().toStdString();
 
-			auto param_handle = (*it++).value().toInt();
-			auto param_option = (*it++).value().toInt();
-			auto param_value = (*it++).value().toStdString();
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
+				auto& request = mRequests[paramHandle];
 
-			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
-				CURL* handle = mHandles[param_handle];
-
-				curl_easy_setopt(handle, static_cast<CURLoption>( param_option ), param_value.c_str());
+				curl_easy_setopt( request.Handle, static_cast<CURLoption>( paramOption ), paramValue.c_str() );
 			}
 		}
 		catch ( std::exception &e ) {

@@ -38,20 +38,19 @@ public:
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* result, const Token& token)
 	{
 		try {
-			ParameterList::const_iterator it = params.begin();
+			auto it = params.cbegin();
+			auto paramHandle = (*it++).value().toInt();
 
-			auto param_handle = (*it++).value().toInt();
+			int32_t methodResult = 0;
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
+				auto& request = mRequests[paramHandle];
 
-			int method_result = CURLE_OK;
-			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
-				CURL* handle = mHandles[param_handle];
+				curl_easy_setopt( request.Handle, CURLOPT_WRITEDATA, &request.Result );
 
-				curl_easy_setopt( handle, CURLOPT_WRITEDATA, &mResults[param_handle] );
-
-				method_result = curl_easy_perform(handle);
+				methodResult = curl_easy_perform( request.Handle );
 			}
 
-			*result = Runtime::IntegerObject( method_result );
+			*result = Runtime::IntegerObject( methodResult );
 		}
 		catch ( std::exception &e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

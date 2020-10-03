@@ -39,12 +39,13 @@ public:
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* result, const Token& token)
 	{
 		try {
-			ParameterList::const_iterator it = params.begin();
+			auto it = params.cbegin();
+			auto paramHandle = (*it++).value().toInt();
 
-			auto param_handle = (*it++).value().toInt();
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
+				auto request = mRequests[paramHandle];
 
-			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
-				*result = Runtime::StringObject( mResults[param_handle] );
+				*result = Runtime::StringObject( request.Result );
 			}
 		}
 		catch ( std::exception &e ) {

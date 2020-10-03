@@ -17,7 +17,7 @@ namespace MQ {
 
 
 MQExtension::MQExtension()
-: AExtension( "MQ", "0.0.1" )
+: AExtension( "System V MQ", "0.1.0" )
 {
 	// initialize pipes
 	mMQs[0];

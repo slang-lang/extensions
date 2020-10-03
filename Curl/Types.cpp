@@ -12,9 +12,8 @@
 namespace Curl {
 
 
-HandleMap mHandles;
-int mNumHandles;
-ResultMap mResults;
+size_t mNumRequests;
+Requests mRequests;
 
 
 }

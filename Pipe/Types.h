@@ -4,9 +4,9 @@
 
 
 // Library includes
-#include <errno.h>
+#include <cerrno>
+#include <climits>
 #include <fcntl.h>
-#include <limits.h>
 #include <map>
 #include <sys/types.h>
 #include <sys/stat.h>

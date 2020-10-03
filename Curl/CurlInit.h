@@ -37,20 +37,20 @@ public:
 	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& /*params*/, Runtime::Object* result, const Token& token)
 	{
 		try {
-			//CURL* handle = curl_easy_init();
-
 			// duplicate base handle, since we want to inherit all of its already set options
-			CURL* handle = curl_easy_duphandle( mHandles[0] );
+			CURL* newHandle = curl_easy_duphandle( mRequests[0].Handle );
 
-			int my_result = 0;
-			if ( handle ) {
-				my_result = ++mNumHandles;
+			int32_t methodResult = 0;
+			if ( newHandle ) {
+				CurlRequest request;
+				request.Handle = newHandle;
 
-				mHandles.insert(std::make_pair(my_result, handle));
-				mResults.insert(std::make_pair(my_result, std::string()));
+				methodResult = static_cast<int32_t>( mRequests.size() );
+
+				mRequests.insert( std::make_pair( mRequests.size(), request ) );
 			}
 
-			*result = Runtime::IntegerObject(my_result);
+			*result = Runtime::IntegerObject( methodResult );
 		}
 		catch ( std::exception &e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

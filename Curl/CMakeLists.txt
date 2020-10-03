@@ -36,5 +36,5 @@ SET(MODULES
 
 add_include(Externals)
 
-build_shared_lib(ExtCurl "${MODULES}")
+build_shared_lib(SlangCurl "${MODULES}")
 

@@ -48,8 +48,8 @@ public:
 				struct Message_t message;
 
 				int msgflg = (param_wait ? 0 : IPC_NOWAIT);
-				if ( msgrcv(queue, &message, sizeof message.mtext, 0, msgflg) != -1 ) {
-					method_result = std::string(message.mtext);
+				if ( msgrcv(queue, &message, sizeof message.mText, 0, msgflg) != -1 ) {
+					method_result = std::string(message.mText );
 				}
 			}
 

@@ -26,7 +26,7 @@ class CurlReset: public Extensions::ExtensionMethod
 {
 public:
 	CurlReset()
-	: ExtensionMethod(0, "curl_reset", Designtime::IntegerObject::TYPENAME, Mutability::Modify)
+	: ExtensionMethod(0, "curl_reset", Designtime::VoidObject::TYPENAME, Mutability::Modify)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
@@ -35,23 +35,17 @@ public:
 	}
 
 
-	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* result, const Token& token)
+	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* /*result*/, const Token& token)
 	{
 		try {
-			ParameterList::const_iterator it = params.begin();
+			auto it = params.cbegin();
+			auto paramHandle = (*it++).value().toInt();
 
-			auto param_handle = (*it++).value().toInt();
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
+				auto& request = mRequests[paramHandle];
 
-			int method_result = 0;		// intialize with negative result
-			if ( param_handle > 0 && param_handle < (int)mHandles.size() ) {
-				CURL* handle = mHandles[param_handle];
-
-				curl_easy_reset(handle);
-
-				method_result = 1;		// positive result
+				curl_easy_reset( request.Handle );
 			}
-
-			*result = Runtime::IntegerObject( method_result );
 		}
 		catch ( std::exception &e ) {
 			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);

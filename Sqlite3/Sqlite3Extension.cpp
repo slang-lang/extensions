@@ -31,12 +31,14 @@ namespace Sqlite3 {
 
 
 Sqlite3Extension::Sqlite3Extension()
-: AExtension( "Sqlite3", "0.0.1" )
+: AExtension( "Sqlite3", "0.2.1" )
 {
-	int result = sqlite3_initialize();
+	auto result = sqlite3_initialize();
 	if ( result != SQLITE_OK ) {
 		std::cerr << "Error while initializing sqlite3 extension!" << std::endl;
 	}
+
+	mName = "Sqlite3 (using libSqlite3 " + std::string( SQLITE_VERSION ) + ")";
 
 	// initialize first connection which acts as invalid handle
 	mConnections[0] = nullptr;

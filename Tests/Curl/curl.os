@@ -10,6 +10,8 @@ public void Main( int argc, string args ) modify {
 	//curl_set_username( handle, "" );
 	curl_set_verbose( handle, false );
 
+	//curl_set_opt_str( handle, CURLOPT_XOAUTH2_BEARER, "" );
+
 	var result = curl_perform( handle );
 	print( "Result: " + result );
 

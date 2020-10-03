@@ -48,4 +48,4 @@ SET(MODULES
     slang
 )
 
-build_shared_lib(ExtMysql "${MODULES}")
+build_shared_lib(SlangMysql "${MODULES}")

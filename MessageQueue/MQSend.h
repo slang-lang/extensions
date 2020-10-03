@@ -46,14 +46,14 @@ public:
 				int& queue = mMQs[param_handle];
 
 				struct Message_t message;
-				message.mtype = 1;
+				message.mType = 1;
 
 				if ( param_message.size() >= 512 ) {
 					param_message.resize(512);
 				}
 
-				snprintf(message.mtext, param_message.size(), "%s", param_message.c_str());
-				message.mtext[param_message.size()] = '\0';
+				snprintf(message.mText, param_message.size(), "%s", param_message.c_str());
+				message.mText[param_message.size()] = '\0';
 
 				method_result = msgsnd(queue, &message, param_message.size() + 1, 0);
 			}

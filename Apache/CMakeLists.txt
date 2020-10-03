@@ -23,5 +23,5 @@ SET(MODULES
 
 add_include(Externals)
 
-build_shared_lib(ExtApache "${MODULES}")
+build_shared_lib(SlangApache "${MODULES}")
 

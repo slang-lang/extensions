@@ -42,8 +42,9 @@ namespace Mysql {
 
 
 MysqlExtension::MysqlExtension()
-: AExtension( "Mysql", "0.0.1" )
+: AExtension( "Mysql", "0.4.1" )
 {
+	mName = "Mysql (using libMysql " + std::string( LIBMYSQL_VERSION ) + ")";
 }
 
 void MysqlExtension::initialize( Slang::IScope* /*scope*/ )

@@ -18,12 +18,17 @@
 namespace Curl {
 
 
-typedef std::map<int, /*result handle*/ CURL*> HandleMap;
-typedef std::map<int, std::string> ResultMap;
+struct CurlRequest {
+	CURL*		Handle { nullptr };
+	std::string	Header;
+	std::string	Result;
+};
 
-extern HandleMap mHandles;
-extern int mNumHandles;
-extern ResultMap mResults;
+
+typedef std::map<int, CurlRequest> Requests;
+
+extern size_t mNumRequests;
+extern Requests mRequests;
 
 
 }
