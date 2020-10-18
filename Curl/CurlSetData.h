@@ -47,6 +47,7 @@ public:
 			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
 				auto& request = mRequests[paramHandle];
 
+				curl_easy_setopt( request.Handle, CURLOPT_POST, 1L );
 				curl_easy_setopt( request.Handle, CURLOPT_COPYPOSTFIELDS, paramData.c_str() );
 			}
 		}
