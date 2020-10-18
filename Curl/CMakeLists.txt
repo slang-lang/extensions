@@ -14,6 +14,7 @@ SET(HEADERS
     CurlReadResult.h
     CurlReset.h
     CurlSetBearer.h
+    CurlSetData.h
     CurlSetHeader.h
     CurlSetOptInt.h
     CurlSetOptStr.h
