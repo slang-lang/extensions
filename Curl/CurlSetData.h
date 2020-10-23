@@ -44,11 +44,14 @@ public:
 			auto paramHandle = (*it++).value().toInt();
 			auto paramData = (*it++).value().toStdString();
 
-			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
-				auto& request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( Requests.size() ) ) {
+				auto& request = Requests[paramHandle];
 
-				curl_easy_setopt( request.Handle, CURLOPT_POST, 1L );
-				curl_easy_setopt( request.Handle, CURLOPT_COPYPOSTFIELDS, paramData.c_str() );
+				curl_easy_setopt( request->Handle, CURLOPT_POST, 1L );
+				// size of the data to copy from the buffer and send in the request
+				curl_easy_setopt( request->Handle, CURLOPT_POSTFIELDSIZE, static_cast<long>( paramData.size() ) );
+				// send data from the local stack
+				curl_easy_setopt( request->Handle, CURLOPT_COPYPOSTFIELDS, paramData.c_str() );
 			}
 		}
 		catch ( std::exception &e ) {

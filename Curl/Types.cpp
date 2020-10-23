@@ -12,8 +12,21 @@
 namespace Curl {
 
 
-size_t mNumRequests;
-Requests mRequests;
+CurlRequests Requests;
+
+
+void cleanup()
+{
+	for ( auto it = Requests.begin(); it != Requests.end(); ++it ) {
+		delete it->second;
+	}
+}
+
+void init()
+{
+	// initialize handles
+	Requests.insert( std::make_pair( 0, nullptr ) );
+}
 
 
 }

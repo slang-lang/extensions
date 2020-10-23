@@ -43,14 +43,14 @@ public:
 			auto paramHandle = (*it++).value().toInt();
 			auto paramBearer = (*it++).value().toStdString();
 
-			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
-				auto& request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( Requests.size() ) ) {
+				auto& request = Requests[paramHandle];
 
-				curl_easy_setopt( request.Handle, CURLOPT_XOAUTH2_BEARER, paramBearer.c_str() );
+				curl_easy_setopt( request->Handle, CURLOPT_XOAUTH2_BEARER, paramBearer.c_str() );
 #ifdef CURLAUTH_BEARER
-				curl_easy_setopt( request.Handle, CURLOPT_HTTPAUTH, CURLAUTH_BEARER );
+				curl_easy_setopt( request->Handle, CURLOPT_HTTPAUTH, CURLAUTH_BEARER );
 #else
-				curl_easy_setopt( request.Handle, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+				curl_easy_setopt( request->Handle, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 #endif
 			}
 		}

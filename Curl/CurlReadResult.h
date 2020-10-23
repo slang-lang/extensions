@@ -42,10 +42,10 @@ public:
 			auto it = params.cbegin();
 			auto paramHandle = (*it++).value().toInt();
 
-			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
-				auto request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( Requests.size() ) ) {
+				auto request = Requests[paramHandle];
 
-				*result = Runtime::StringObject( request.Result );
+				*result = Runtime::StringObject( request->Result );
 			}
 		}
 		catch ( std::exception &e ) {

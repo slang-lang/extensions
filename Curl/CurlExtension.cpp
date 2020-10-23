@@ -26,34 +26,23 @@
 
 namespace Curl {
 
-static size_t write_data( void *contents, size_t size, size_t nmemb, void *stream )
-{
-	static_cast<std::string*>( stream )->append( (char*)contents, size * nmemb );
-
-	return size * nmemb;
-}
-
 
 CurlExtension::CurlExtension()
-: Slang::Extensions::AExtension( "Curl", "0.2.1" )
+: Slang::Extensions::AExtension( "Curl", "0.3.0" )
 {
-	curl_global_init(CURL_GLOBAL_ALL);
+	curl_global_init( CURL_GLOBAL_ALL );
 
 	// initialize name & version
 	auto* curl = curl_version_info( CURLVERSION_NOW );
 	mName = "Curl (using libCurl " + std::string( curl->version ) + ")";
 
-	// initialize handles
-	CurlRequest request;
-	request.Handle = curl_easy_init();
-
-	mRequests.insert( std::make_pair( 0, request ) );
-
-	curl_easy_setopt( mRequests[0].Handle, CURLOPT_WRITEFUNCTION, write_data );
+	Curl::init();
 }
 
 CurlExtension::~CurlExtension()
 {
+	Curl::cleanup();
+
 	curl_global_cleanup();
 }
 
@@ -87,6 +76,13 @@ void CurlExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods
 	methods.push_back( new CurlSetUrl() );
 	methods.push_back( new CurlSetUsername() );
 	methods.push_back( new CurlSetVerbose() );
+}
+
+size_t CurlExtension::write_data( void *contents, size_t size, size_t nmemb, void *stream )
+{
+	static_cast<std::string*>( stream )->append( (char*)contents, size * nmemb );
+
+	return size * nmemb;
 }
 
 

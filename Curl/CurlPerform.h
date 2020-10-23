@@ -42,12 +42,13 @@ public:
 			auto paramHandle = (*it++).value().toInt();
 
 			int32_t methodResult = 0;
-			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
-				auto& request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( Requests.size() ) ) {
+				auto& request = Requests[paramHandle];
 
-				curl_easy_setopt( request.Handle, CURLOPT_WRITEDATA, &request.Result );
+				curl_easy_setopt( request->Handle, CURLOPT_HTTPHEADER, request->HeaderList );
+				curl_easy_setopt( request->Handle, CURLOPT_WRITEDATA, &request->Result );
 
-				methodResult = curl_easy_perform( request.Handle );
+				methodResult = curl_easy_perform( request->Handle );
 			}
 
 			*result = Runtime::IntegerObject( methodResult );

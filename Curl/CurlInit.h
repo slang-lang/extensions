@@ -38,16 +38,19 @@ public:
 	{
 		try {
 			// duplicate base handle, since we want to inherit all of its already set options
-			CURL* newHandle = curl_easy_duphandle( mRequests[0].Handle );
+			//CURL* newHandle = curl_easy_duphandle( Requests[0].Handle );
+			auto* newHandle = curl_easy_init();
 
 			int32_t methodResult = 0;
 			if ( newHandle ) {
-				CurlRequest request;
-				request.Handle = newHandle;
+				auto* request = new CurlRequest();
+				request->Handle = newHandle;
 
-				methodResult = static_cast<int32_t>( mRequests.size() );
+				curl_easy_setopt( newHandle, CURLOPT_WRITEFUNCTION, CurlExtension::write_data );
 
-				mRequests.insert( std::make_pair( mRequests.size(), request ) );
+				methodResult = static_cast<int32_t>( Requests.size() );
+
+				Requests.insert( std::make_pair( Requests.size(), request ) );
 			}
 
 			*result = Runtime::IntegerObject( methodResult );

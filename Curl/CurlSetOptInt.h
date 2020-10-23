@@ -45,10 +45,10 @@ public:
 			auto paramOption = (*it++).value().toInt();
 			auto paramValue = (*it++).value().toInt();
 
-			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
-				auto& request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( Requests.size() ) ) {
+				auto& request = Requests[paramHandle];
 
-				curl_easy_setopt( request.Handle, static_cast<CURLoption>( paramOption ), paramValue );
+				curl_easy_setopt( request->Handle, static_cast<CURLoption>( paramOption ), paramValue );
 			}
 		}
 		catch ( std::exception &e ) {

@@ -41,13 +41,13 @@ public:
 			auto it = params.cbegin();
 			auto paramHandle = (*it++).value().toInt();
 
-			if ( paramHandle > 0 && paramHandle < static_cast<int>( mRequests.size() ) ) {
-				auto& request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int>( Requests.size() ) ) {
+				auto& request = Requests[paramHandle];
 
-				curl_easy_cleanup( request.Handle );
+				curl_easy_cleanup( request->Handle );
 
-				request.Handle = nullptr;
-				request.Result.clear();
+				request->Handle = nullptr;
+				request->Result.clear();
 			}
 		}
 		catch ( std::exception &e ) {

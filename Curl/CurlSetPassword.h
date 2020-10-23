@@ -43,10 +43,10 @@ public:
 			auto paramHandle = (*it++).value().toInt();
 			auto paramPassword = (*it++).value().toStdString();
 
-			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( mRequests.size() ) ) {
-				auto& request = mRequests[paramHandle];
+			if ( paramHandle > 0 && paramHandle < static_cast<int32_t>( Requests.size() ) ) {
+				auto& request = Requests[paramHandle];
 
-				curl_easy_setopt( request.Handle, CURLOPT_PASSWORD, paramPassword.c_str() );
+				curl_easy_setopt( request->Handle, CURLOPT_PASSWORD, paramPassword.c_str() );
 			}
 		}
 		catch ( std::exception &e ) {

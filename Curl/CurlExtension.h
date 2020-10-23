@@ -21,11 +21,14 @@ class CurlExtension : public Slang::Extensions::AExtension
 {
 public:
 	CurlExtension();
-	~CurlExtension();
+	~CurlExtension() override;
 
 public:
-	void initialize(Slang::IScope* scope);
-	void provideMethods(Slang::Extensions::ExtensionMethods &methods);
+	void initialize(Slang::IScope* scope) override;
+	void provideMethods(Slang::Extensions::ExtensionMethods &methods) override;
+
+public:
+	static size_t write_data( void *contents, size_t size, size_t nmemb, void *stream );
 };
 
 
