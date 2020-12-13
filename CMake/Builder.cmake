@@ -55,6 +55,11 @@ function(_handle_modules_pre_linker modules)
         _handle_pre_json()
     endif()
 
+    list(FIND modules "mariadb" found)
+    if ( ${found} GREATER -1 )
+        _handle_pre_mariadb()
+    endif()
+
     list(FIND modules "mysql" found)
     if ( ${found} GREATER -1 )
         _handle_pre_mysql()
@@ -219,6 +224,44 @@ endfunction()
 
 ### JSON
 ###############################
+
+
+###############################
+### MARIADB
+
+function(_mariadb_check_existence)
+
+    # make sure the appropriate environment variable is set!
+    if("${BUILD_MARIA_INC}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_MARIA_INC needed for mariadb!")
+    endif()
+
+    if("${BUILD_MARIA_LIB}" STREQUAL "")
+        MESSAGE(FATAL_ERROR "BUILD_MARIA_LIB needed for mariadb!")
+    endif()
+
+endfunction()
+
+
+function(_handle_post_mariadb target)
+
+    _mariadb_check_existence()
+    target_link_libraries(${target} mariadbclient)
+
+endfunction()
+
+
+function(_handle_pre_mariadb)
+
+    _mariadb_check_existence()
+    include_directories(${BUILD_MARIA_INC})
+    link_directories(${BUILD_MARIA_LIB})
+
+endfunction()
+
+### MARIADB
+###############################
+
 
 ###############################
 ### MYSQL
