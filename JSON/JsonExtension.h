@@ -16,7 +16,7 @@
 namespace Json {
 
 
-class JsonExtension : public AExtension
+class JsonExtension : public Slang::Extensions::AExtension
 {
 public:
 	JsonExtension();

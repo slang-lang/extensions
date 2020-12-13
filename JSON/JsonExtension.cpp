@@ -36,7 +36,7 @@ void JsonExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods
 }
 
 
-extern "C" AExtension* factory( void ) {
-	return dynamic_cast<AExtension*>( new Json::JsonExtension() );
+extern "C" Slang::Extensions::AExtension* factory( void ) {
+	return dynamic_cast<Slang::Extensions::AExtension*>( new Json::JsonExtension() );
 }
 
