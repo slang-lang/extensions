@@ -251,7 +251,7 @@ endfunction()
 function(_handle_post_mariadb target)
 
     _mariadb_check_existence()
-    target_link_libraries(${target} mariadbclient)
+    target_link_libraries(${target} mariadb)
 
 endfunction()
 

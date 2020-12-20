@@ -40,7 +40,6 @@ SET(HEADERS
 )
 
 SET(DEPENDENCIES
-    mysqlclient
 )
 
 SET(MODULES
