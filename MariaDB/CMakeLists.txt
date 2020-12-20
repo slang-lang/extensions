@@ -40,7 +40,7 @@ SET(HEADERS
 )
 
 SET(DEPENDENCIES
-    mariadbclient
+    mariadb
 )
 
 SET(MODULES

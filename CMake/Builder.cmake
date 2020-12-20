@@ -85,6 +85,11 @@ function(_handle_modules_post_linker modules target)
         _handle_post_json(${target})
     endif()
 
+    list(FIND modules "mariadb" found)
+    if ( ${found} GREATER -1 )
+        _handle_post_mariadb(${target})
+    endif()
+
     list(FIND modules "mysql" found)
     if ( ${found} GREATER -1 )
         _handle_post_mysql(${target})
