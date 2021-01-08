@@ -42,7 +42,7 @@ public:
 
 			std::string result_value;
 
-			StringMap::const_iterator postIt = mGetQueryString.find(param_name);
+			StringMap::const_iterator postIt = mPostQueryString.find(param_name);
 			if ( postIt != mPostQueryString.end() ) {
 				result_value = postIt->second;
 			}

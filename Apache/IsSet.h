@@ -41,9 +41,10 @@ public:
 			std::string param_name = (*it++).value().toStdString();
 
 			bool result_value = false;
-
-			StringMap::const_iterator getIt = mGetQueryString.find(param_name);
-			if ( getIt != mGetQueryString.end() ) {
+			if ( mGetQueryString.find(param_name) != mGetQueryString.end() ) {
+				result_value = true;
+			}
+			else if ( mPostQueryString.find(param_name) != mPostQueryString.end() ) {
 				result_value = true;
 			}
 
