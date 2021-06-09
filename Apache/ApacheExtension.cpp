@@ -137,7 +137,7 @@ std::string UriEncode(const std::string & sSrc)
 
 
 ApacheExtension::ApacheExtension()
-: AExtension( "Apache", "0.1.2" )
+: AExtension( "Apache", "0.1.3" )
 {
 }
 
@@ -198,9 +198,9 @@ void ApacheExtension::readPostData()
 		return;
 	}
 
-	auto len = strtol(len_, nullptr, 10);
+	auto len = strtoul( len_, nullptr, 10 );
 
-	auto* postdata = (char*)malloc(len + 1);
+	auto* postdata = static_cast<char*>( malloc( len + 1 ) );
 	if ( !postdata ) {
 		exit(EXIT_FAILURE);
 	}
