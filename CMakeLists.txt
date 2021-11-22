@@ -18,7 +18,7 @@ INCLUDE(CMake/Base.cmake)
 
 ADD_SUBDIRECTORY(Apache)
 #ADD_SUBDIRECTORY(Curl)		# extension has been moved to a separate repository
-ADD_SUBDIRECTORY(JSON)
+#ADD_SUBDIRECTORY(JSON)
 ADD_SUBDIRECTORY(MessageQueue)
 #ADD_SUBDIRECTORY(MariaDB)	# extension has been moved to a separate repository
 #ADD_SUBDIRECTORY(Mysql)	# extension has been moved to a separate repository
