@@ -21,6 +21,9 @@
 namespace Apache {
 
 
+const char* CONTENT_LENGTH = "CONTENT_LENGTH";
+const char* QUERY_STRING   = "QUERY_STRING";
+
 const signed char HEX2DEC[256] = 
 {
     /*       0  1  2  3   4  5  6  7   8  9  A  B   C  D  E  F */
@@ -72,72 +75,71 @@ const signed char SAFE[256] =
 
 std::string UriDecode(const std::string & sSrc)
 {
-    // Note from RFC1630:  "Sequences which start with a percent sign
-    // but are not followed by two hexadecimal characters (0-9, A-F) are reserved
-    // for future extension"
+	// Note from RFC1630:  "Sequences which start with a percent sign
+	// but are not followed by two hexadecimal characters (0-9, A-F) are reserved
+	// for future extension"
     
-    const auto* pSrc = (const unsigned char*)sSrc.c_str();
-    const int SRC_LEN = sSrc.length();
-    const unsigned char* const SRC_END = pSrc + SRC_LEN;
-    const unsigned char* const SRC_LAST_DEC = SRC_END - 2;   // last decodable '%'
+	const auto* pSrc = (const unsigned char*)sSrc.c_str();
+	const int SRC_LEN = sSrc.length();
+	const unsigned char* const SRC_END = pSrc + SRC_LEN;
+	const unsigned char* const SRC_LAST_DEC = SRC_END - 2;   // last decodable '%'
 
-    char * const pStart = new char[SRC_LEN];
-    char * pEnd = pStart;
+	char * const pStart = new char[SRC_LEN];
+	char * pEnd = pStart;
 
-    while ( pSrc < SRC_LAST_DEC ) {
+	while ( pSrc < SRC_LAST_DEC ) {
 		if ( *pSrc == '%' ) {
-            char dec1, dec2;
-            if ( -1 != (dec1 = HEX2DEC[*(pSrc + 1)])
-                && -1 != (dec2 = HEX2DEC[*(pSrc + 2)]) ) {
-                *pEnd++ = (dec1 << 4) + dec2;
-                pSrc += 3;
-                continue;
-            }
-        }
+			char dec1, dec2;
+			if ( -1 != (dec1 = HEX2DEC[*(pSrc + 1)]) && -1 != (dec2 = HEX2DEC[*(pSrc + 2)]) ) {
+				*pEnd++ = (dec1 << 4) + dec2;
+				pSrc += 3;
+				continue;
+			}
+		}
 
-        *pEnd++ = *pSrc++;
-	}
-
-    // the last 2- chars
-    while ( pSrc < SRC_END ) {
 		*pEnd++ = *pSrc++;
 	}
 
-    std::string sResult(pStart, pEnd);
-    delete [] pStart;
+	// the last 2- chars
+	while ( pSrc < SRC_END ) {
+		*pEnd++ = *pSrc++;
+	}
+
+	std::string sResult(pStart, pEnd);
+	delete [] pStart;
 	return sResult;
 }
 
 std::string UriEncode(const std::string & sSrc)
 {
-    const char DEC2HEX[16 + 1] = "0123456789ABCDEF";
-    const auto* pSrc = (const unsigned char *)sSrc.c_str();
-    const int SRC_LEN = sSrc.length();
-    auto* const pStart = new unsigned char[SRC_LEN * 3];
-    unsigned char * pEnd = pStart;
-    const unsigned char* const SRC_END = pSrc + SRC_LEN;
+	const char DEC2HEX[16 + 1] = "0123456789ABCDEF";
+	const auto* pSrc = (const unsigned char *)sSrc.c_str();
+	const int SRC_LEN = sSrc.length();
+	auto* const pStart = new unsigned char[SRC_LEN * 3];
+	unsigned char * pEnd = pStart;
+	const unsigned char* const SRC_END = pSrc + SRC_LEN;
 
-    for ( ; pSrc < SRC_END; ++pSrc ) {
+	for ( ; pSrc < SRC_END; ++pSrc ) {
 		if ( SAFE[*pSrc] ) {
 			*pEnd++ = *pSrc;
 		}
-        else {
-            // escape this char
-            *pEnd++ = '%';
-            *pEnd++ = DEC2HEX[*pSrc >> 4];
-            *pEnd++ = DEC2HEX[*pSrc & 0x0F];
-        }
+		else {
+			// escape this char
+			*pEnd++ = '%';
+			*pEnd++ = DEC2HEX[*pSrc >> 4];
+			*pEnd++ = DEC2HEX[*pSrc & 0x0F];
+		}
 	}
 
-    std::string sResult((char *)pStart, (char *)pEnd);
-    delete [] pStart;
-    return sResult;
+	std::string sResult((char *)pStart, (char *)pEnd);
+	delete [] pStart;
+	return sResult;
 }
 
 
 
 ApacheExtension::ApacheExtension()
-: AExtension( "Apache", "0.1.3" )
+: AExtension( "Apache", "0.1.4" )
 {
 }
 
@@ -167,32 +169,29 @@ void ApacheExtension::readGetData()
 
 	std::list<char*> stringlist;
 
-	char* base = strtok(query, "&");
+	char* base = strtok( query, "&" );
 	while ( base != nullptr ) {
-		stringlist.push_back(base);
+		stringlist.push_back( base );
 
-		base = strtok(nullptr, "&");
+		base = strtok( nullptr, "&" );
 	}
 
 	for ( auto it = stringlist.rbegin(); it != stringlist.rend(); ++it ) {
-		char* key = strtok((*it), "=");
-		char* value = strtok(nullptr, "");
+		char* key = strtok( (*it), "=" );
+		char* value = strtok( nullptr, "" );
 
 		std::string strvalue;
 		if ( value ) {
-			strvalue = std::string(value);
+			strvalue = std::string( value );
 		}
 
-		mGetQueryString.insert(std::make_pair(
-			std::string(key),
-			UriDecode(strvalue))
-		);
+		mGetQueryString.insert( std::make_pair(	std::string( key ), UriDecode( strvalue ) ) );
 	}
 }
 
 void ApacheExtension::readPostData()
 {
-	char* len_ = getenv("CONTENT_LENGTH");
+	char* len_ = getenv( CONTENT_LENGTH );
 	if ( !len_ ) {
 		// no CONTENT_LENGTH received
 		return;
@@ -202,38 +201,35 @@ void ApacheExtension::readPostData()
 
 	auto* postdata = static_cast<char*>( malloc( len + 1 ) );
 	if ( !postdata ) {
-		exit(EXIT_FAILURE);
+		exit( EXIT_FAILURE );
 	}
 
-	if ( !fgets(postdata, len + 1, stdin) ) {
-		exit(EXIT_FAILURE);
+	if ( !fgets( postdata, len + 1, stdin ) ) {
+		exit( EXIT_FAILURE );
 	}
 
 	std::list<char*> stringList;
 
-	char* base = strtok(postdata, "&");
+	char* base = strtok( postdata, "&" );
 	while ( base != nullptr ) {
-		stringList.push_back(base);
+		stringList.push_back( base );
 
-		base = strtok(nullptr, "&");
+		base = strtok( nullptr, "&" );
 	}
 
 	for ( auto it = stringList.rbegin(); it != stringList.rend(); ++it ) {
-		char* key = strtok((*it), "=");
-		char* value = strtok(nullptr, "");
+		char* key = strtok( (*it), "=" );
+		char* value = strtok( nullptr, "" );
 
 		std::string strvalue;
 		if ( value ) {
-			strvalue = std::string(value);
+			strvalue = std::string( value );
 		}
 
-		mPostQueryString.insert(std::make_pair(
-			std::string(key),
-			UriDecode(strvalue))
-		);
+		mPostQueryString.insert( std::make_pair( std::string( key ), UriDecode( strvalue ) ) );
 	}
 
-	free(postdata);
+	free( postdata );
 }
 
 }
