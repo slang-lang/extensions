@@ -23,6 +23,7 @@ namespace Apache {
 
 const char* CONTENT_LENGTH = "CONTENT_LENGTH";
 const char* QUERY_STRING   = "QUERY_STRING";
+const char* REQUEST_METHOD = "REQUEST_METHOD";
 
 const signed char HEX2DEC[256] = 
 {
@@ -145,8 +146,20 @@ ApacheExtension::ApacheExtension()
 
 void ApacheExtension::initialize( Slang::IScope* /*scope*/ )
 {
-	readGetData();
-	readPostData();
+	char* request = getenv( "REQUEST_METHOD" );
+	if ( request == nullptr ) {
+		// not a valid request
+		std::cout << "no REQUEST_METHOD received!" << std::endl;
+
+		return;
+	}
+
+	if ( strcmp( request, "GET" ) == 0 ) {
+		readGetData();
+	}
+	else if ( strcmp( request, "POST" ) == 0 ) {
+		readPostData();
+	}
 }
 
 void ApacheExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
@@ -191,20 +204,29 @@ void ApacheExtension::readGetData()
 
 void ApacheExtension::readPostData()
 {
-	char* len_ = getenv( CONTENT_LENGTH );
-	if ( !len_ ) {
+	char* contentLength = getenv( "CONTENT_LENGTH" );
+	if ( !contentLength ) {
 		// no CONTENT_LENGTH received
+		std::cout << "no CONTENT_LENGTH received!" << std::endl;
+
 		return;
 	}
 
-	auto len = strtoul( len_, nullptr, 10 );
+	auto length = strtoul( contentLength, nullptr, 10 );
+	//auto length = static_cast<unsigned long>( atoi( contentLength ) );
+	if ( length <= 0 ) {
+		// invalid length received
+		std::cout << "invalid length received!" << std::endl;
 
-	auto* postdata = static_cast<char*>( malloc( len + 1 ) );
+		return;
+	}
+
+	auto* postdata = static_cast<char*>( malloc( length + 1 ) );
 	if ( !postdata ) {
 		exit( EXIT_FAILURE );
 	}
 
-	if ( !fgets( postdata, len + 1, stdin ) ) {
+	if ( !fgets( postdata, length + 1, stdin ) ) {
 		exit( EXIT_FAILURE );
 	}
 
