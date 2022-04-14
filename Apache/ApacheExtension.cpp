@@ -140,7 +140,7 @@ std::string UriEncode(const std::string & sSrc)
 
 
 ApacheExtension::ApacheExtension()
-: AExtension( "Apache", "0.1.4" )
+: AExtension( "Apache", "0.1.5" )
 {
 }
 
@@ -149,15 +149,21 @@ void ApacheExtension::initialize( Slang::IScope* /*scope*/ )
 	char* request = getenv( "REQUEST_METHOD" );
 	if ( request == nullptr ) {
 		// not a valid request
-		std::cout << "no REQUEST_METHOD received!" << std::endl;
+		//std::cout << "no REQUEST_METHOD received!" << std::endl;
 
 		return;
 	}
 
+	readGetData();
+
+/*
 	if ( strcmp( request, "GET" ) == 0 ) {
 		readGetData();
 	}
-	else if ( strcmp( request, "POST" ) == 0 ) {
+	else
+*/
+
+	if ( strcmp( request, "POST" ) == 0 ) {
 		readPostData();
 	}
 }
@@ -204,19 +210,19 @@ void ApacheExtension::readGetData()
 
 void ApacheExtension::readPostData()
 {
-	char* contentLength = getenv( "CONTENT_LENGTH" );
+	auto* contentLength = getenv( CONTENT_LENGTH );
 	if ( !contentLength ) {
 		// no CONTENT_LENGTH received
-		std::cout << "no CONTENT_LENGTH received!" << std::endl;
+		//std::cout << "no CONTENT_LENGTH received!" << std::endl;
 
 		return;
 	}
 
-	auto length = strtoul( contentLength, nullptr, 10 );
-	//auto length = static_cast<unsigned long>( atoi( contentLength ) );
+	//auto length = strtoul( contentLength, nullptr, 10 );
+	auto length = static_cast<unsigned long>( atoi( contentLength ) );
 	if ( length <= 0 ) {
 		// invalid length received
-		std::cout << "invalid length received!" << std::endl;
+		//std::cout << "invalid length received!" << std::endl;
 
 		return;
 	}
