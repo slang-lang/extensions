@@ -140,7 +140,7 @@ std::string UriEncode(const std::string & sSrc)
 
 
 ApacheExtension::ApacheExtension()
-: AExtension( "Apache", "0.1.5" )
+: AExtension( "Apache", "0.2.0" )
 {
 }
 
@@ -236,26 +236,7 @@ void ApacheExtension::readPostData()
 		exit( EXIT_FAILURE );
 	}
 
-	std::list<char*> stringList;
-
-	char* base = strtok( postdata, "&" );
-	while ( base != nullptr ) {
-		stringList.push_back( base );
-
-		base = strtok( nullptr, "&" );
-	}
-
-	for ( auto it = stringList.rbegin(); it != stringList.rend(); ++it ) {
-		char* key = strtok( (*it), "=" );
-		char* value = strtok( nullptr, "" );
-
-		std::string strvalue;
-		if ( value ) {
-			strvalue = std::string( value );
-		}
-
-		mPostQueryString.insert( std::make_pair( std::string( key ), UriDecode( strvalue ) ) );
-	}
+	mPostQueryString.insert( std::make_pair( std::string( "REQUEST" ), std::string( postdata ) ) );
 
 	free( postdata );
 }
