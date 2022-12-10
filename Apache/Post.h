@@ -22,7 +22,7 @@ class Post : public Extensions::ExtensionMethod
 {
 public:
 	Post()
-	: ExtensionMethod(0, "post", Designtime::StringObject::TYPENAME)
+	: ExtensionMethod(nullptr, "post", Designtime::StringObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));

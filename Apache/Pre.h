@@ -23,7 +23,7 @@ class Pre : public Extensions::ExtensionMethod
 {
 public:
 	Pre()
-	: ExtensionMethod(0, "pre", Designtime::VoidObject::TYPENAME)
+	: ExtensionMethod(nullptr, "pre", Designtime::VoidObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("text", Designtime::StringObject::TYPENAME));

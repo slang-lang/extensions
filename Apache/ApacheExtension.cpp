@@ -140,13 +140,13 @@ std::string UriEncode(const std::string & sSrc)
 
 
 ApacheExtension::ApacheExtension()
-: AExtension( "Apache", "0.2.0" )
+: AExtension( "Apache", "0.2.1" )
 {
 }
 
-void ApacheExtension::initialize( Slang::IScope* /*scope*/ )
+void ApacheExtension::initialize( Slang::Extensions::ExtensionNamespace* /*scope*/ )
 {
-	char* request = getenv( "REQUEST_METHOD" );
+	char* request = getenv( REQUEST_METHOD );
 	if ( request == nullptr ) {
 		// not a valid request
 		//std::cout << "no REQUEST_METHOD received!" << std::endl;
@@ -170,8 +170,6 @@ void ApacheExtension::initialize( Slang::IScope* /*scope*/ )
 
 void ApacheExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
-	assert( methods.empty() );
-
 	methods.push_back( new Get() );
 	methods.push_back( new IsSet() );
 	methods.push_back( new Post() );

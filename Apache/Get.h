@@ -21,7 +21,7 @@ class Get : public Extensions::ExtensionMethod
 {
 public:
 	Get()
-	: ExtensionMethod(0, "get", Designtime::StringObject::TYPENAME)
+	: ExtensionMethod(nullptr, "get", Designtime::StringObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));

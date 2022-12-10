@@ -22,7 +22,7 @@ class IsSet : public Extensions::ExtensionMethod
 {
 public:
 	IsSet()
-	: ExtensionMethod(0, "isSet", Designtime::BoolObject::TYPENAME)
+	: ExtensionMethod(nullptr, "isSet", Designtime::BoolObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));
