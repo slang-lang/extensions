@@ -17,17 +17,13 @@ namespace Pipe {
 
 
 PipeExtension::PipeExtension()
-: AExtension( "Pipe", "0.0.1" )
+: AExtension( "Pipe", "0.0.2" )
 {
 	// initialize pipes
 	mPipes[0];
 }
 
-PipeExtension::~PipeExtension()
-{
-}
-
-void PipeExtension::initialize( Slang::IScope* scope )
+void PipeExtension::initialize( Slang::Extensions::ExtensionNamespace* scope )
 {
 	//std::cout << "PipeExtension::initialize()" << std::endl;
 
@@ -38,8 +34,6 @@ void PipeExtension::initialize( Slang::IScope* scope )
 
 void PipeExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
-	assert( methods.empty() );
-
 	methods.push_back( new PipeClose() );
 	methods.push_back( new PipeOpen() );
 	methods.push_back( new PipeRead() );

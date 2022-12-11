@@ -21,10 +21,10 @@ class PipeExtension : public Slang::Extensions::AExtension
 {
 public:
     PipeExtension();
-    ~PipeExtension();
+    ~PipeExtension() = default;
 
 public:
-    void initialize( Slang::IScope* scope );
+    void initialize( Slang::Extensions::ExtensionNamespace* scope );
     void provideMethods( Slang::Extensions::ExtensionMethods& methods );
 };
 
