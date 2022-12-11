@@ -21,7 +21,7 @@ class MQReceive : public Extensions::ExtensionMethod
 {
 public:
 	MQReceive()
-	: ExtensionMethod(0, "msgrcv", Designtime::StringObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgrcv", Designtime::StringObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));

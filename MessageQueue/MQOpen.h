@@ -21,7 +21,7 @@ class MQOpenByID : public Extensions::ExtensionMethod
 {
 public:
 	MQOpenByID()
-	: ExtensionMethod(0, "msgget", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgget", Designtime::IntegerObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("id", Designtime::IntegerObject::TYPENAME));
@@ -71,7 +71,7 @@ class MQOpenByName : public Extensions::ExtensionMethod
 {
 public:
 	MQOpenByName()
-	: ExtensionMethod(0, "msgget", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgget", Designtime::IntegerObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));

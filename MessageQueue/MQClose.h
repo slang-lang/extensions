@@ -21,7 +21,7 @@ class MQClose : public Extensions::ExtensionMethod
 {
 public:
 	MQClose()
-	: ExtensionMethod(0, "msgctl", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgctl", Designtime::IntegerObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));

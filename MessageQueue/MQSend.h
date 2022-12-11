@@ -21,7 +21,7 @@ class MQSend : public Extensions::ExtensionMethod
 {
 public:
 	MQSend()
-	: ExtensionMethod(0, "msgsnd", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgsnd", Designtime::IntegerObject::TYPENAME)
 	{
 		ParameterList params;
 		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
