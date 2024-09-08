@@ -25,24 +25,24 @@ const char* CONTENT_LENGTH = "CONTENT_LENGTH";
 const char* QUERY_STRING   = "QUERY_STRING";
 const char* REQUEST_METHOD = "REQUEST_METHOD";
 
-const signed char HEX2DEC[256] = 
+const signed char HEX2DEC[256] =
 {
     /*       0  1  2  3   4  5  6  7   8  9  A  B   C  D  E  F */
     /* 0 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 1 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 2 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 3 */  0, 1, 2, 3,  4, 5, 6, 7,  8, 9,-1,-1, -1,-1,-1,-1,
-    
+
     /* 4 */ -1,10,11,12, 13,14,15,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 5 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 6 */ -1,10,11,12, 13,14,15,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 7 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
-    
+
     /* 8 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* 9 */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* A */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* B */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
-    
+
     /* C */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* D */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     /* E */ -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
@@ -57,17 +57,17 @@ const signed char SAFE[256] =
     /* 1 */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* 2 */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* 3 */ 1,1,1,1, 1,1,1,1, 1,1,0,0, 0,0,0,0,
-    
+
     /* 4 */ 0,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
     /* 5 */ 1,1,1,1, 1,1,1,1, 1,1,1,0, 0,0,0,0,
     /* 6 */ 0,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1,
     /* 7 */ 1,1,1,1, 1,1,1,1, 1,1,1,0, 0,0,0,0,
-    
+
     /* 8 */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* 9 */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* A */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* B */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-    
+
     /* C */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* D */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
     /* E */ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
@@ -79,7 +79,7 @@ std::string UriDecode(const std::string & sSrc)
 	// Note from RFC1630:  "Sequences which start with a percent sign
 	// but are not followed by two hexadecimal characters (0-9, A-F) are reserved
 	// for future extension"
-    
+
 	const auto* pSrc = (const unsigned char*)sSrc.c_str();
 	const int SRC_LEN = sSrc.length();
 	const unsigned char* const SRC_END = pSrc + SRC_LEN;
@@ -211,17 +211,12 @@ void ApacheExtension::readPostData()
 	auto* contentLength = getenv( CONTENT_LENGTH );
 	if ( !contentLength ) {
 		// no CONTENT_LENGTH received
-		//std::cout << "no CONTENT_LENGTH received!" << std::endl;
-
 		return;
 	}
 
-	//auto length = strtoul( contentLength, nullptr, 10 );
-	auto length = static_cast<unsigned long>( atoi( contentLength ) );
+	auto length = static_cast<unsigned long>( atol( contentLength ) );
 	if ( length <= 0 ) {
 		// invalid length received
-		//std::cout << "invalid length received!" << std::endl;
-
 		return;
 	}
 
@@ -245,4 +240,3 @@ void ApacheExtension::readPostData()
 extern "C" Slang::Extensions::AExtension* factory( void ) {
 	return dynamic_cast<Slang::Extensions::AExtension*>( new Apache::ApacheExtension() );
 }
-

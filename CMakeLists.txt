@@ -1,6 +1,6 @@
-PROJECT(Slang-Extensions)
+cmake_minimum_required(VERSION 3.5)
 
-cmake_minimum_required(VERSION 3.0)
+PROJECT(Slang-Extensions)
 
 # cmake policy changes. use "cmake --help-policy <policyid>" for details
 if ( CMAKE_VERSION VERSION_LESS "3.0.0" )
@@ -19,4 +19,3 @@ INCLUDE(CMake/Base.cmake)
 ADD_SUBDIRECTORY(Apache)
 ADD_SUBDIRECTORY(MessageQueue)
 ADD_SUBDIRECTORY(Pipe)
-
