@@ -1,4 +1,9 @@
+# IDE stuff
 .idea
 .vscode
 build
 cmake-build-debug
+
+# generated stuff
+CMake/Dependencies.cmake
+
