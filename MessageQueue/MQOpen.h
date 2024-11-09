@@ -21,12 +21,12 @@ class MQOpenByID : public Extensions::ExtensionMethod
 {
 public:
 	MQOpenByID()
-	: ExtensionMethod(nullptr, "msgget", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgget", Designtime::Int32Type::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("id", Designtime::IntegerObject::TYPENAME));
-		//params.push_back(Parameter::CreateDesigntime("mode", Designtime::IntegerObject::TYPENAME, 666, true));
-		params.push_back(Parameter::CreateDesigntime("create", Designtime::BoolObject::TYPENAME, false, true));
+		params.push_back(Parameter::CreateDesigntime("id", Designtime::Int32Type::TYPENAME));
+		//params.push_back(Parameter::CreateDesigntime("mode", Designtime::Int32Type::TYPENAME, 666, true));
+		params.push_back(Parameter::CreateDesigntime("create", Designtime::BoolType::TYPENAME, false, true));
 
 		setSignature(params);
 	}
@@ -46,18 +46,18 @@ public:
 			size_t queue_handle = mMQs.size();
 			int& queue = mMQs[queue_handle] = -1;
 			key_t key = param_id;
-		       
+
 			queue = msgget(key, 0666 | (param_create ? IPC_CREAT : 0));
 
 			if ( queue == -1 ) {
 				queue_handle = 0;
 			}
 
-			*result = Runtime::IntegerObject( static_cast<int>(queue_handle) );
+			*result = Runtime::Int32Type( static_cast<int>(queue_handle) );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
@@ -71,12 +71,12 @@ class MQOpenByName : public Extensions::ExtensionMethod
 {
 public:
 	MQOpenByName()
-	: ExtensionMethod(nullptr, "msgget", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgget", Designtime::Int32Type::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));
-		//params.push_back(Parameter::CreateDesigntime("mode", Designtime::IntegerObject::TYPENAME, 666, true));
-		params.push_back(Parameter::CreateDesigntime("create", Designtime::BoolObject::TYPENAME, false, true));
+		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringType::TYPENAME));
+		//params.push_back(Parameter::CreateDesigntime("mode", Designtime::Int32Type::TYPENAME, 666, true));
+		params.push_back(Parameter::CreateDesigntime("create", Designtime::BoolType::TYPENAME, false, true));
 
 		setSignature(params);
 	}
@@ -96,7 +96,7 @@ public:
 			size_t queue_handle = mMQs.size();
 			int& queue = mMQs[queue_handle] = -1;
 			key_t key;
-		       
+
 			if ( (key = ftok(param_name.c_str(), 'B')) != -1 ) {
 				queue = msgget(key, 0666 | (param_create ? IPC_CREAT : 0));
 			}
@@ -105,11 +105,11 @@ public:
 				queue_handle = 0;
 			}
 
-			*result = Runtime::IntegerObject( static_cast<int>(queue_handle) );
+			*result = Runtime::Int32Type( static_cast<int>(queue_handle) );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
@@ -124,4 +124,3 @@ public:
 
 
 #endif
-

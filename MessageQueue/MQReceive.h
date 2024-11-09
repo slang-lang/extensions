@@ -21,11 +21,11 @@ class MQReceive : public Extensions::ExtensionMethod
 {
 public:
 	MQReceive()
-	: ExtensionMethod(nullptr, "msgrcv", Designtime::StringObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgrcv", Designtime::StringType::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("wait", Designtime::BoolObject::TYPENAME, false, true));
+		params.push_back(Parameter::CreateDesigntime("handle", Designtime::Int32Type::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("wait", Designtime::BoolType::TYPENAME, false, true));
 
 		setSignature(params);
 	}
@@ -53,11 +53,11 @@ public:
 				}
 			}
 
-			*result = Runtime::StringObject( method_result );
+			*result = Runtime::StringType( method_result );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
@@ -72,4 +72,3 @@ public:
 
 
 #endif
-

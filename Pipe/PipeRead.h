@@ -21,10 +21,10 @@ class PipeRead : public Extensions::ExtensionMethod
 {
 public:
 	PipeRead()
-	: ExtensionMethod(0, "pipe_read", Designtime::StringObject::TYPENAME)
+	: ExtensionMethod(0, "pipe_read", Designtime::StringType::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("handle", Designtime::Int32Type::TYPENAME));
 
 		setSignature(params);
 	}
@@ -52,11 +52,11 @@ public:
 				method_result = std::string(buffer);
 			}
 
-			*result = Runtime::StringObject( method_result );
+			*result = Runtime::StringType( method_result );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
@@ -71,4 +71,3 @@ public:
 
 
 #endif
-

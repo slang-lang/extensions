@@ -22,10 +22,10 @@ class Post : public Extensions::ExtensionMethod
 {
 public:
 	Post()
-	: ExtensionMethod(nullptr, "post", Designtime::StringObject::TYPENAME)
+	: ExtensionMethod(nullptr, "post", Designtime::StringType::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringType::TYPENAME));
 
 		setSignature(params);
 	}
@@ -47,11 +47,11 @@ public:
 				result_value = postIt->second;
 			}
 
-			*result = Runtime::StringObject(result_value);
+			*result = Runtime::StringType(result_value);
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;

@@ -21,12 +21,12 @@ class PipeOpen : public Extensions::ExtensionMethod
 {
 public:
 	PipeOpen()
-	: ExtensionMethod(0, "pipe_open", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(0, "pipe_open", Designtime::Int32Type::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("mode", Designtime::StringObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("block", Designtime::BoolObject::TYPENAME, true, true));
+		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringType::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("mode", Designtime::StringType::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("block", Designtime::BoolType::TYPENAME, true, true));
 
 		setSignature(params);
 	}
@@ -58,11 +58,11 @@ public:
 				}
 			}
 
-			*result = Runtime::IntegerObject( static_cast<int>(pipe_handle) );
+			*result = Runtime::Int32Type( static_cast<int>(pipe_handle) );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
@@ -77,4 +77,3 @@ public:
 
 
 #endif
-

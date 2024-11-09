@@ -21,11 +21,11 @@ class MQSend : public Extensions::ExtensionMethod
 {
 public:
 	MQSend()
-	: ExtensionMethod(nullptr, "msgsnd", Designtime::IntegerObject::TYPENAME)
+	: ExtensionMethod(nullptr, "msgsnd", Designtime::Int32Type::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("handle", Designtime::IntegerObject::TYPENAME));
-		params.push_back(Parameter::CreateDesigntime("message", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("handle", Designtime::Int32Type::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("message", Designtime::StringType::TYPENAME));
 
 		setSignature(params);
 	}
@@ -58,11 +58,11 @@ public:
 				method_result = msgsnd(queue, &message, param_message.size() + 1, 0);
 			}
 
-			*result = Runtime::IntegerObject( method_result );
+			*result = Runtime::Int32Type( method_result );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
@@ -77,4 +77,3 @@ public:
 
 
 #endif
-

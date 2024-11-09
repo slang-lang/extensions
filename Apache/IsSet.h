@@ -6,7 +6,7 @@
 // Library includes
 
 // Project includes
-#include <Core/Runtime/BuildInTypes/BoolObject.h>
+#include <Core/Runtime/BuildInTypes/BoolType.h>
 #include "Defines.h"
 
 // Forward declarations
@@ -22,10 +22,10 @@ class IsSet : public Extensions::ExtensionMethod
 {
 public:
 	IsSet()
-	: ExtensionMethod(nullptr, "isSet", Designtime::BoolObject::TYPENAME)
+	: ExtensionMethod(nullptr, "isSet", Designtime::BoolType::TYPENAME)
 	{
 		ParameterList params;
-		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringObject::TYPENAME));
+		params.push_back(Parameter::CreateDesigntime("name", Designtime::StringType::TYPENAME));
 
 		setSignature(params);
 	}
@@ -48,11 +48,11 @@ public:
 				result_value = true;
 			}
 
-			*result = Runtime::BoolObject(result_value);
+			*result = Runtime::BoolType(result_value);
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringObject::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringObject(std::string(e.what()));
+			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
 			return Runtime::ControlFlow::Throw;
