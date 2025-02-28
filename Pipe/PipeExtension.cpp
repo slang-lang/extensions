@@ -25,11 +25,17 @@ PipeExtension::PipeExtension()
 
 void PipeExtension::initialize( Slang::Extensions::ExtensionNamespace* scope )
 {
-	//std::cout << "PipeExtension::initialize()" << std::endl;
+	std::cout << "PipeExtension::initialize()" << std::endl;
 
-	(void)scope;
+	scope->defineExternal( "O_NDELAY", new Slang::Runtime::Int32Type( O_NDELAY ) );
+	scope->defineExternal( "O_RDONLY", new Slang::Runtime::Int32Type( O_RDONLY ) );
+	scope->defineExternal( "O_WRONLY", new Slang::Runtime::Int32Type( O_WRONLY ) );
 
-	// global vars/consts currently don't work for extensions :-(
+	scope->defineExternal( "EFAULT", new Slang::Runtime::Int32Type( EFAULT ) );
+	scope->defineExternal( "EINVAL", new Slang::Runtime::Int32Type( EINVAL ) );
+	scope->defineExternal( "EMFILE", new Slang::Runtime::Int32Type( EMFILE ) );
+	scope->defineExternal( "ENFILE", new Slang::Runtime::Int32Type( ENFILE ) );
+	//scope->defineExternal( "ENOPKG", new Slang::Runtime::Int32Type( ENOPKG ) );
 }
 
 void PipeExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )

@@ -58,7 +58,7 @@ public:
 				}
 			}
 
-			*result = Runtime::Int32Type( static_cast<int>( pipe_handle ) );
+			*result = Runtime::Int32Type( static_cast<int32_t>( pipe_handle ) );
 		}
 		catch ( std::exception& e ) {
 			auto *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
