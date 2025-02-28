@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 PROJECT(Slang-Extensions)
 
@@ -11,4 +11,3 @@ INCLUDE(CMake/Base.cmake)
 
 ADD_SUBDIRECTORY(Apache)
 ADD_SUBDIRECTORY(MessageQueue)
-ADD_SUBDIRECTORY(Pipe)
