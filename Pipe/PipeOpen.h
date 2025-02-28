@@ -39,18 +39,18 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			std::string param_name = (*it++).value().toStdString();
-			std::string param_mode = (*it++).value().toStdString();
-			bool param_block = (*it++).value().toBool();
+			auto param_name  = (*it++).value().toStdString();
+			auto param_mode  = (*it++).value().toStdString();
+			auto param_block = (*it++).value().toBool();
 
 			size_t pipe_handle = 0;
 
 			if ( param_mode == "r" || param_mode == "w" ) {
 				pipe_handle = mPipes.size();
-				int& p = mPipes[pipe_handle];
+				auto& p = mPipes[pipe_handle];
 
-				if ( mknod(param_name.c_str(), S_IFIFO | 0666, 0) == 0 || errno == EEXIST ) {
-					p = open(param_name.c_str(), (param_mode == "r" ? O_RDONLY : O_WRONLY) | (param_block ? 0 : O_NDELAY) );
+				if ( mknod( param_name.c_str(), S_IFIFO | 0666, 0 ) == 0 || errno == EEXIST ) {
+					p = open( param_name.c_str(), (param_mode == "r" ? O_RDONLY : O_WRONLY) | (param_block ? 0 : O_NDELAY) );
 				}
 				else {
 					// error while creating pipe
@@ -58,10 +58,10 @@ public:
 				}
 			}
 
-			*result = Runtime::Int32Type( static_cast<int>(pipe_handle) );
+			*result = Runtime::Int32Type( static_cast<int>( pipe_handle ) );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			auto *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
 			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());

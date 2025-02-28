@@ -17,10 +17,10 @@ namespace Pipe {
 
 
 PipeExtension::PipeExtension()
-: AExtension( "Pipe", "0.0.2" )
+: AExtension( "Pipe", "0.1.0" )
 {
 	// initialize pipes
-	mPipes[0];
+	mPipes[ 0 ];
 }
 
 void PipeExtension::initialize( Slang::Extensions::ExtensionNamespace* scope )
@@ -47,4 +47,3 @@ void PipeExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods
 extern "C" Slang::Extensions::AExtension* factory( void ) {
 	return dynamic_cast<Slang::Extensions::AExtension*>( new Pipe::PipeExtension() );
 }
-

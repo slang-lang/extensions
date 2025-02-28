@@ -37,25 +37,24 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			int param_handle = (*it++).value().toInt();
+			auto param_handle = (*it++).value().toInt();
 
 			std::string method_result;
 
-			if ( param_handle > 0 && param_handle < (int)mPipes.size() ) {
-				int& p = mPipes[param_handle];
-
+			if ( param_handle > 0 && param_handle < static_cast<int32_t>( mPipes.size() ) ) {
 				char buffer[PIPE_BUF];
 
-				int length = read(p, buffer, PIPE_BUF);
+				auto& p = mPipes[param_handle];
+				auto length = read( p, buffer, PIPE_BUF );
 				buffer[length] = '\0';
 
-				method_result = std::string(buffer);
+				method_result = std::string( buffer );
 			}
 
 			*result = Runtime::StringType( method_result );
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			auto *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
 			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
