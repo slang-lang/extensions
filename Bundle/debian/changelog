@@ -1,4 +1,4 @@
-slang-slang (0.9.3) noble; urgency=medium
+slang-apache (0.9.3) noble; urgency=medium
 
   * Refactored debian package structure
 

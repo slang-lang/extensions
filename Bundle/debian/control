@@ -1,4 +1,4 @@
-Source: slang-slang
+Source: slang-apache
 Section: libs
 Priority: optional
 Maintainer: Michael Adelmann <madelmann@github.com>
@@ -9,11 +9,11 @@ Vcs-Git: https://github.com/slang-lang/slang-meta.git
 Vcs-Browser: https://github.com/slang-lang/slang
 Homepage: https://www.slang-lang.org/
 
-Package: slang-slang
+Package: slang-apache
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          slang (>= 0.9.3)
-Description: Extension module slang for the Slang scripting language
- This package provides the slang extension module for Slang, installed
+Description: Extension module apache for the Slang scripting language
+ This package provides the apache extension module for Slang, installed
  as a shared object for dynamic loading.
