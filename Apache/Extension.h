@@ -17,11 +17,11 @@
 namespace Apache {
 
 
-class ApacheExtension : public Slang::Extensions::AExtension
+class Extension : public Slang::Extensions::AExtension
 {
 public:
-	ApacheExtension();
-    ~ApacheExtension() = default;
+	Extension();
+    ~Extension() = default;
 
 	void initialize( Slang::Extensions::ExtensionNamespace* scope );
 	void provideMethods( Slang::Extensions::ExtensionMethods& methods );

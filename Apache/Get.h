@@ -37,11 +37,11 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			std::string param_name = (*it++).value().toStdString();
+			auto param_name = (*it++).value().toStdString();
 
 			std::string result_value;
 
-			StringMap::const_iterator getIt = mGetQueryString.find(param_name);
+			auto getIt = mGetQueryString.find(param_name);
 			if ( getIt != mGetQueryString.end() ) {
 				result_value = getIt->second;
 			}
@@ -49,7 +49,7 @@ public:
 			*result = Runtime::StringType(result_value);
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			auto* data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
 			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());

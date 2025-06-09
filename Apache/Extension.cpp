@@ -1,6 +1,6 @@
 
 // Header
-#include "ApacheExtension.h"
+#include "Extension.h"
 
 // Library includes
 #include <cstdio>
@@ -139,12 +139,12 @@ std::string UriEncode(const std::string & sSrc)
 
 
 
-ApacheExtension::ApacheExtension()
+Extension::Extension()
 : AExtension( "extApache", "0.2.2" )
 {
 }
 
-void ApacheExtension::initialize( Slang::Extensions::ExtensionNamespace* /*scope*/ )
+void Extension::initialize( Slang::Extensions::ExtensionNamespace* /*scope*/ )
 {
 	char* request = getenv( REQUEST_METHOD );
 	if ( request == nullptr ) {
@@ -161,7 +161,7 @@ void ApacheExtension::initialize( Slang::Extensions::ExtensionNamespace* /*scope
 	}
 }
 
-void ApacheExtension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
+void Extension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
 	methods.push_back( new Get() );
 	methods.push_back( new IsSet() );
@@ -169,7 +169,7 @@ void ApacheExtension::provideMethods( Slang::Extensions::ExtensionMethods& metho
 	methods.push_back( new Pre() );
 }
 
-void ApacheExtension::readGetData()
+void Extension::readGetData()
 {
 	char *query = getenv( QUERY_STRING );
 	if ( !query ) {
@@ -199,7 +199,7 @@ void ApacheExtension::readGetData()
 	}
 }
 
-void ApacheExtension::readPostData()
+void Extension::readPostData()
 {
 	auto* contentLength = getenv( CONTENT_LENGTH );
 	if ( !contentLength ) {
@@ -231,5 +231,5 @@ void ApacheExtension::readPostData()
 
 
 extern "C" Slang::Extensions::AExtension* factory( void ) {
-	return dynamic_cast<Slang::Extensions::AExtension*>( new Apache::ApacheExtension() );
+	return dynamic_cast<Slang::Extensions::AExtension*>( new Apache::Extension() );
 }

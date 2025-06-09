@@ -1,12 +1,12 @@
 INCLUDE(${PROJECT_SOURCE_DIR}/CMake/Base.cmake)
 
 SET(SOURCES
-	ApacheExtension.cpp
+	Extension.cpp
 	Types.cpp
 )
 
 SET(HEADERS
-	ApacheExtension.h
+	Extension.h
 	Get.h
 	IsSet.h
 	Post.h

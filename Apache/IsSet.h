@@ -38,7 +38,7 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			std::string param_name = (*it++).value().toStdString();
+			auto param_name = (*it++).value().toStdString();
 
 			bool result_value = false;
 			if ( mGetQueryString.find(param_name) != mGetQueryString.end() ) {
@@ -51,7 +51,7 @@ public:
 			*result = Runtime::BoolType(result_value);
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			auto* data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
 			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());

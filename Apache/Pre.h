@@ -39,7 +39,8 @@ public:
 		try {
 			ParameterList::const_iterator it = list.begin();
 
-			std::string param_text = (*it++).value().toStdString();
+			auto param_text = (*it++).value().toStdString();
+
 			size_t start = 0;
 
 			while ( (start = param_text.find_first_of(APACHEEXT_VARPREFIX, start)) != std::string::npos ) {
@@ -49,7 +50,7 @@ public:
 					break;
 				}
 
-				std::string var = param_text.substr(start + 1, end - start - 1);
+				auto var = param_text.substr(start + 1, end - start - 1);
 
 				Symbol* symbol = this->resolve(var, false);
 				if ( !symbol ) {
@@ -59,7 +60,7 @@ public:
 					continue;	// skip symbols with wrong type
 				}
 
-				Runtime::Object* tmp = dynamic_cast<Runtime::Object*>(symbol);
+				auto* tmp = dynamic_cast<Runtime::Object*>(symbol);
 
 				param_text.replace(start, end - start + 1, tmp->getValue().toStdString());
 			}
@@ -67,7 +68,7 @@ public:
 			std::cout << param_text << std::endl;
 		}
 		catch ( std::exception& e ) {
-			Runtime::Object *data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
+			auto* data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
 			*data = Runtime::StringType(std::string(e.what()));
 
 			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
