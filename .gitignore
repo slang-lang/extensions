@@ -8,5 +8,5 @@ Bundle/man/*.gz
 Bundle/debian/.debhelper
 Bundle/debian/debhelper-build-stamp
 Bundle/debian/files
-Bundle/debian/slang-slang/
+Bundle/debian/slang-apache/
 CMake/Dependencies.cmake
