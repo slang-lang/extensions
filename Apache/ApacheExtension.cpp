@@ -140,7 +140,7 @@ std::string UriEncode(const std::string & sSrc)
 
 
 ApacheExtension::ApacheExtension()
-: AExtension( "Apache", "0.2.1" )
+: AExtension( "extApache", "0.2.2" )
 {
 }
 
@@ -155,13 +155,6 @@ void ApacheExtension::initialize( Slang::Extensions::ExtensionNamespace* /*scope
 	}
 
 	readGetData();
-
-/*
-	if ( strcmp( request, "GET" ) == 0 ) {
-		readGetData();
-	}
-	else
-*/
 
 	if ( strcmp( request, "POST" ) == 0 ) {
 		readPostData();
