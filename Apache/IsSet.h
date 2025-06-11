@@ -31,32 +31,23 @@ public:
 	}
 
 public:
-	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList &params, Runtime::Object *result, const Token &token)
+	Runtime::ControlFlow::E execute( const ParameterList &params, Runtime::Object *result )
 	{
 		ParameterList list = mergeParameters(params);
 
-		try {
-			ParameterList::const_iterator it = list.begin();
+		ParameterList::const_iterator it = list.begin();
 
-			auto param_name = (*it++).value().toStdString();
+		auto param_name = (*it++).value().toStdString();
 
-			bool result_value = false;
-			if ( mGetQueryString.find(param_name) != mGetQueryString.end() ) {
-				result_value = true;
-			}
-			else if ( mPostQueryString.find(param_name) != mPostQueryString.end() ) {
-				result_value = true;
-			}
-
-			*result = Runtime::BoolType(result_value);
+		bool result_value = false;
+		if ( mGetQueryString.find(param_name) != mGetQueryString.end() ) {
+			result_value = true;
 		}
-		catch ( std::exception& e ) {
-			auto* data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringType(std::string(e.what()));
-
-			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
-			return Runtime::ControlFlow::Throw;
+		else if ( mPostQueryString.find(param_name) != mPostQueryString.end() ) {
+			result_value = true;
 		}
+
+		*result = Runtime::BoolType(result_value);
 
 		return Runtime::ControlFlow::Normal;
 	}

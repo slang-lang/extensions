@@ -30,31 +30,22 @@ public:
 	}
 
 public:
-	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList &params, Runtime::Object *result, const Token &token)
+	Runtime::ControlFlow::E execute( const ParameterList &params, Runtime::Object *result )
 	{
 		ParameterList list = mergeParameters(params);
 
-		try {
-			ParameterList::const_iterator it = list.begin();
+		ParameterList::const_iterator it = list.begin();
 
-			auto param_name = (*it++).value().toStdString();
+		auto param_name = (*it++).value().toStdString();
 
-			std::string result_value;
+		std::string result_value;
 
-			auto getIt = mGetQueryString.find(param_name);
-			if ( getIt != mGetQueryString.end() ) {
-				result_value = getIt->second;
-			}
-
-			*result = Runtime::StringType(result_value);
+		auto getIt = mGetQueryString.find(param_name);
+		if ( getIt != mGetQueryString.end() ) {
+			result_value = getIt->second;
 		}
-		catch ( std::exception& e ) {
-			auto* data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringType(std::string(e.what()));
 
-			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
-			return Runtime::ControlFlow::Throw;
-		}
+		*result = Runtime::StringType(result_value);
 
 		return Runtime::ControlFlow::Normal;
 	}
