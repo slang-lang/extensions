@@ -4,6 +4,7 @@
 
 
 // Library includes
+#include <iostream>
 
 // Project includes
 #include "Defines.h"
