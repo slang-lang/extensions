@@ -9,4 +9,5 @@ PROJECT(Slang-Extensions)
 
 INCLUDE(CMake/Base.cmake)
 
-ADD_SUBDIRECTORY(Apache)
+ADD_SUBDIRECTORY(Extension)
+
