@@ -140,7 +140,7 @@ std::string UriEncode(const std::string & sSrc)
 
 
 Extension::Extension()
-: AExtension( "extApache", "0.2.2" )
+: AExtension( "extApache", "0.3.0" )
 {
 }
 
