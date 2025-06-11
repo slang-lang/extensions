@@ -32,48 +32,39 @@ public:
 	}
 
 public:
-	Runtime::ControlFlow::E execute(Common::ThreadId threadId, const ParameterList& params, Runtime::Object* /*result*/, const Token& token)
+	Runtime::ControlFlow::E execute( const ParameterList& params, Runtime::Object* /*result*/ )
 	{
 		ParameterList list = mergeParameters(params);
 
-		try {
-			ParameterList::const_iterator it = list.begin();
+		ParameterList::const_iterator it = list.begin();
 
-			auto param_text = (*it++).value().toStdString();
+		auto param_text = (*it++).value().toStdString();
 
-			size_t start = 0;
+		size_t start = 0;
 
-			while ( (start = param_text.find_first_of(APACHEEXT_VARPREFIX, start)) != std::string::npos ) {
-				size_t end = param_text.find_first_of(APACHEEXT_VARPREFIX, start + 1);
+		while ( (start = param_text.find_first_of(APACHEEXT_VARPREFIX, start)) != std::string::npos ) {
+			size_t end = param_text.find_first_of(APACHEEXT_VARPREFIX, start + 1);
 
-				if ( end == std::string::npos ) {
-					break;
-				}
-
-				auto var = param_text.substr(start + 1, end - start - 1);
-
-				Symbol* symbol = this->resolve(var, false);
-				if ( !symbol ) {
-					continue;	// skip not-existing symbols
-				}
-				if ( symbol->getSymbolType() != Symbol::IType::ObjectSymbol ) {
-					continue;	// skip symbols with wrong type
-				}
-
-				auto* tmp = dynamic_cast<Runtime::Object*>(symbol);
-
-				param_text.replace(start, end - start + 1, tmp->getValue().toStdString());
+			if ( end == std::string::npos ) {
+				break;
 			}
 
-			std::cout << param_text << std::endl;
-		}
-		catch ( std::exception& e ) {
-			auto* data = Controller::Instance().repository()->createInstance(Runtime::StringType::TYPENAME, ANONYMOUS_OBJECT);
-			*data = Runtime::StringType(std::string(e.what()));
+			auto var = param_text.substr(start + 1, end - start - 1);
 
-			Controller::Instance().thread(threadId)->exception() = Runtime::ExceptionData(data, token.position());
-			return Runtime::ControlFlow::Throw;
+			Symbol* symbol = this->resolve(var, false);
+			if ( !symbol ) {
+				continue;	// skip not-existing symbols
+			}
+			if ( symbol->getSymbolType() != Symbol::IType::ObjectSymbol ) {
+				continue;	// skip symbols with wrong type
+			}
+
+			auto* tmp = dynamic_cast<Runtime::Object*>(symbol);
+
+			param_text.replace(start, end - start + 1, tmp->getValue().toStdString());
 		}
+
+		std::cout << param_text << std::endl;
 
 		return Runtime::ControlFlow::Normal;
 	}
